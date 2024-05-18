@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         TextInputEditText userdnhap = findViewById(R.id.tieNhapUsername);
         TextInputEditText mkdnhap = findViewById(R.id.tieNhapmatkhau);
-
         TextView btnsignup = findViewById(R.id.btnsignup);
         TextView quenmk = findViewById(R.id.forgot);
         Button signin= findViewById(R.id.btnDangnhap);
@@ -62,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         btnsignup.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, Dki.class);
             startActivity(intent);
-            finish();
+            //finish();
+            //đoạn này ko cần finish đâu - huynk ph38086
         });
 
         quenmk.setOnClickListener(v -> {

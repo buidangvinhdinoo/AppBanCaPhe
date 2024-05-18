@@ -30,7 +30,10 @@ public class Dki extends AppCompatActivity {
         TextInputEditText mkdki = findViewById(R.id.tieNhapmatkhausignup);
 
         dkii.setOnClickListener(v -> {
-            startActivity(new Intent(Dki.this, MainActivity.class));
+            //startActivity(new Intent(Dki.this, MainActivity.class));
+            //khi activity đăng nhập chưa finish
+            //nên chỉ cần finish activity đăng kỹ sẽ quay lại activity đăng nhập
+            //cách này sẽ tối ưu hơn - huynk ph38086
             finish();
         });
 
