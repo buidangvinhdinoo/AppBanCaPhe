@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = userdnhap.getText().toString();
+                //phát sinh lỗi ở đây - Huynk PH38086
+                //chức năng quên mật khẩu bị lỗi - Huynk PH38086
                 mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

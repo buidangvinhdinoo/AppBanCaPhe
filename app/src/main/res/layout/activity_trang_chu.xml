@@ -17,6 +17,4 @@
         android:textSize="24dp"
         android:textColor="@color/red"/>
 
-    
-
 </LinearLayout>

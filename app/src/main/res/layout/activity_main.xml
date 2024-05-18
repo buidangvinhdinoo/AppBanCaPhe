@@ -4,121 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:background="#FFFFFF"
-
-
+    android:layout_margin="5dp"
     android:orientation="vertical"
+    android:gravity="center|top"
     tools:context=".MainActivity">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:src="@drawable/chao" />
 
-        android:src="@drawable/chao"
-        android:layout_marginBottom="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LOGIN YOUR ACCOOUT"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
         android:textSize="25dp"
         android:typeface="normal"
-        android:layout_marginBottom="40dp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"
-        android:layout_gravity="center"/>
-
+        android:fontFamily="sans-serif-medium" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:background="@drawable/uwu"
-
         app:hintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tieNhapUsername"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            android:layout_margin="5dp"
             android:hint="Email"
-            android:paddingBottom="10dp"
-            android:paddingStart="15dp"
             android:textColor="#52292424"
-            android:background="@null"
-
-            android:textColorHint="#9C27B0" />
-
+            android:textColorHint="#9C27B0"
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/uwu"
         app:hintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tieNhapmatkhau"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            android:layout_margin="5dp"
             android:hint="Password"
-            android:paddingBottom="10dp"
-            android:paddingStart="15dp"
             android:textColor="#52292424"
-            android:background="@null"
-            android:textColorHint="#9C27B0" />
-
+            android:textColorHint="#9C27B0"
+            android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="end"
         android:textColor="#66CCFF"
-        android:layout_marginTop="10dp"
-        android:text="Forgot password?"
-        android:layout_marginLeft="105dp"
-        />
-    <LinearLayout
+        android:layout_marginEnd="25dp"
+        android:layout_marginVertical="10dp"
+        android:text="Forgot password?" />
+
+    <Button
+        android:id="@+id/btnDangnhap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:background="@drawable/uwu2"
+        android:text="LOGIN"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="20dp" />
 
-        >
-
-        <Button
-            android:id="@+id/btnDangnhap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-
-            android:background="@drawable/uwu2"
-            android:gravity="center"
-            android:text="LOGIN"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-
-
-            app:cornerRadius="20dp" />
-
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center_vertical">
-
+        android:layout_margin="5dp"
+        android:gravity="center">
 
         <View
             android:layout_width="0dp"
@@ -140,11 +116,12 @@
             android:background="@color/black"/> <!-- Đường line ngang -->
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <ImageButton
             android:layout_width="80dp"
@@ -155,44 +132,37 @@
         <ImageButton
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginHorizontal="10dp"
             android:src="@drawable/icon1"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/uwu3"
-            android:layout_marginEnd="10dp"/>
+            android:background="@drawable/uwu3" />
 
         <ImageButton
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/icon2"
-            android:background="@drawable/uwu3"
-            />
+            android:background="@drawable/uwu3" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Don't have account?"
-            />
+            android:text="Don't have account? " />
 
         <TextView
             android:id="@+id/btnsignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="Sign Up"
             android:textColor="#66CCFF"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
+            android:textStyle="bold" />
 
+    </LinearLayout>
 
 </LinearLayout>
