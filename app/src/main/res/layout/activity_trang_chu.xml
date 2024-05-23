@@ -9,6 +9,7 @@
     tools:context=".TrangChu">
 
     <TextView
+        android:id="@+id/xin_chao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/itim"
