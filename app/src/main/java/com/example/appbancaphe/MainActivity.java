@@ -1,85 +1,53 @@
 package com.example.appbancaphe;
 
-import android.content.Intent;
+import static android.app.ProgressDialog.show;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.appbancaphe.databinding.ActivityMainBinding;
+import com.example.appbancaphe.fragment.Cart;
+import com.example.appbancaphe.fragment.Home;
+import com.example.appbancaphe.fragment.Product;
+import com.example.appbancaphe.fragment.TaiKhoan;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    ActivityMainBinding binding ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mAuth = FirebaseAuth.getInstance();
-        TextInputEditText userdnhap = findViewById(R.id.tieNhapUsername);
-        TextInputEditText mkdnhap = findViewById(R.id.tieNhapmatkhau);
-        TextView btnsignup = findViewById(R.id.btnsignup);
-        TextView quenmk = findViewById(R.id.forgot);
-        Button signin= findViewById(R.id.btnDangnhap);
-
-        signin.setOnClickListener(v -> {
-            String email = userdnhap.getText().toString();
-            String password = mkdnhap.getText().toString();
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Vui lòng nhập đủ thông tin đăng nhập",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("Main", "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(getApplicationContext(), "Đăng nhập thành công",
-                                Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(MainActivity.this, TrangChu.class));
-                        finish();
-
-                        //updateUI(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("Main", "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(MainActivity.this, "Vui lòng kiểm tra lại tài khoản hoặc mậy khẩu",
-                                Toast.LENGTH_SHORT).show();
-
-                        //updateUI(null);
-                    }
-                });
+        setContentView(binding.getRoot());
+        binding.bottomnav.setOnItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()){
+                case R.id.home:
+                    relaceFragment(new Home());
+                    break;
+                case R.id.product:
+                    relaceFragment(new Product());
+                    break;
+                case R.id.sanpham:
+                    relaceFragment(new Cart());
+                    break;
+                case R.id.taikhoan:
+                    relaceFragment(new TaiKhoan());
+                    break;
             }
+            return true;
         });
 
-        btnsignup.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Dki.class);
-            startActivity(intent);
-            //finish();
-            //đoạn này ko cần finish đâu - huynk ph38086
-        });
 
-        quenmk.setOnClickListener(v -> {
-            String email = userdnhap.getText().toString();
-            if (email.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Vui lòng nhập email của bạn",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        Toast.makeText(MainActivity.this, "Vui lòng kiểm tra hộp thư email",
-                                Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(MainActivity.this, "Lỗi gửi email", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+
+
+    }
+    private void relaceFragment(TaiKhoan fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentlayout,fragment);
+        fragmentTransaction.commit();
     }
     }
