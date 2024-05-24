@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="start|top"
+    android:padding="14dp"
     tools:context=".fragment.Home">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/xin_chao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itim"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginBottom="18dp"
+        android:text="Ngày mới tốt lành, người dùng!"
+        android:textSize="24dp"
+        android:textColor="@color/red"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itim"
+        android:layout_margin="18dp"
+        android:text="Ưu đãi đặc biệt hôm nay"
+        android:textSize="29dp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:src="@drawable/default_banner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itim"
+        android:layout_margin="18dp"
+        android:text="Sản Phẩm Bán Chạy"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

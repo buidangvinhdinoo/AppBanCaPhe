@@ -21,7 +21,7 @@ public class Welcom extends AppCompatActivity {
             @Override
             public void run() {
                 // Chuyển sang MainActivity
-                Intent intent = new Intent(Welcom.this, MainActivity.class);
+                Intent intent = new Intent(Welcom.this, Login.class);
                 startActivity(intent);
                 finish();
             }

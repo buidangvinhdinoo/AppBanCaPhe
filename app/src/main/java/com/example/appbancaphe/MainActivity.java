@@ -1,10 +1,9 @@
 package com.example.appbancaphe;
 
-import static android.app.ProgressDialog.show;
-
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,39 +14,40 @@ import com.example.appbancaphe.fragment.Product;
 import com.example.appbancaphe.fragment.TaiKhoan;
 
 public class MainActivity extends AppCompatActivity {
-    ActivityMainBinding binding ;
-
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         binding.bottomnav.setOnItemSelectedListener(menuItem -> {
-            switch (menuItem.getItemId()){
-                case R.id.home:
-                    relaceFragment(new Home());
-                    break;
-                case R.id.product:
-                    relaceFragment(new Product());
-                    break;
-                case R.id.sanpham:
-                    relaceFragment(new Cart());
-                    break;
-                case R.id.taikhoan:
-                    relaceFragment(new TaiKhoan());
-                    break;
+            int itemId = menuItem.getItemId();
+            Fragment selectedFragment = null;
+
+            if (itemId == R.id.btnhome) {
+                selectedFragment = new Home();
+            } else if (itemId == R.id.btnproduct) {
+                selectedFragment = new Product();
+            } else if (itemId == R.id.btncart) {
+                selectedFragment = new Cart();
+            } else if (itemId == R.id.btntaikhoan) {
+                selectedFragment = new TaiKhoan();
             }
+
+            if (selectedFragment != null) {
+                replaceFragment(selectedFragment);
+            }
+
             return true;
         });
-
-
-
-
     }
-    private void relaceFragment(TaiKhoan fragment){
+
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentlayout,fragment);
+        fragmentTransaction.replace(R.id.fragmentlayout, fragment);
         fragmentTransaction.commit();
     }
-    }
+}
