@@ -47,7 +47,9 @@ public class TrangChuAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        return null;
+        //holder.img_cafe;
+        holder.ten_loai.setText(getItem(position).loai);
+        return convertView;
     }
 
     static class ViewHolder{
