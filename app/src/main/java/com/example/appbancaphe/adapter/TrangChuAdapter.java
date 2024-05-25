@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.appbancaphe.R;
 import com.example.appbancaphe.model.Cafe;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,8 +48,11 @@ public class TrangChuAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        //holder.img_cafe;
-        holder.ten_loai.setText(getItem(position).loai);
+        Cafe item = getItem(position);
+        if (item != null) {
+            Picasso.get().load(item.anh).into(holder.img_cafe);
+            holder.ten_loai.setText(getItem(position).loai);
+        }
         return convertView;
     }
 
