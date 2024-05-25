@@ -44,6 +44,13 @@
         android:text="Sản Phẩm Bán Chạy"
         android:textSize="32dp"
         android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black" />
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="9dp" />
 
 </LinearLayout>
