@@ -3,11 +3,11 @@ package com.example.appbancaphe.model;
 import java.sql.Date;
 
 public class HoaDon {
-    public String _id;
+    public String id;
     public String gio_hang_id;
-    public String nhan_vien_id; //nguoi tao hoa don
-    public int trang_thai; //chua thanh toan, da thanh toan nhung chua giao, khach da nhan
+    public String nhan_vien_id; //người tạo hóa đơn
+    public int trang_thai; //0: chưa thanh toán, 1: đã thanh toán nhưng chưa giao, 2: khách đã nhận
     public Date ngay_tao;
 
-    //
+    //làm sau
 }

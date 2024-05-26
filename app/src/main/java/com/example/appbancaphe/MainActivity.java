@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        replaceFragment(new Home());//mặc định
+
         binding.bottomnav.setOnItemSelectedListener(menuItem -> {
             int itemId = menuItem.getItemId();
             Fragment selectedFragment = null;

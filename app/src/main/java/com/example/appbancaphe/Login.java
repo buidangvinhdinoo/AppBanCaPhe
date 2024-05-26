@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
+
         mAuth = FirebaseAuth.getInstance();
         TextInputEditText userdnhap = findViewById(R.id.tieuNhapUsername);
         TextInputEditText mkdnhap = findViewById(R.id.tieNhapmatkhau);
@@ -35,6 +36,14 @@ public class Login extends AppCompatActivity {
         signin.setOnClickListener(v -> {
             String email = userdnhap.getText().toString();
             String password = mkdnhap.getText().toString();
+
+            //tai khoan admin, để đăng nhập test cho nhanh
+            if (email.equals("admin") && password.equals("admin")){
+                Toast.makeText(getApplicationContext(), " Chào admin!",
+                        Toast.LENGTH_LONG).show();
+                startActivity(new Intent(Login.this, MainActivity.class));
+                finish();
+            }
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(Login.this, "Vui lòng nhập đủ thông tin đăng nhập",

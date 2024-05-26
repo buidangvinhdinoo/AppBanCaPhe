@@ -17,6 +17,7 @@ public class Welcom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_welcom);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -1,19 +1,19 @@
 package com.example.appbancaphe.model;
 
 public class Cafe {
-    public String _id;
+    public String id;
     public String anh; //link
-    public int loai;
-    public int kich_co;
+    public String loai; //
+    public int kich_co; //1: nhỏ, 2: vừa, 3: lớn
     public double don_gia;
-    public int trang_thai; //ban het, dang ban
+    public int trang_thai; //0: bán hết, 1: đang bán
 
     public Cafe() {
     }
 
-    public Cafe(String _id, String anh, int loai, int kich_co, double don_gia, int trang_thai) {
+    public Cafe(String id, String anh, String loai, int kich_co, double don_gia, int trang_thai) {
+        this.id = id;
         this.anh = anh;
-        this._id = _id;
         this.loai = loai;
         this.kich_co = kich_co;
         this.don_gia = don_gia;
@@ -21,6 +21,6 @@ public class Cafe {
     }
 
     public Cafe timKiem(String _id){
-        return null; //
+        return null; //làm sau
     }
 }

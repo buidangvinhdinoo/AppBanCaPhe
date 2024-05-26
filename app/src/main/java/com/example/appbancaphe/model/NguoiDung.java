@@ -4,13 +4,13 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class NguoiDung {
-    public String _id;
+    public String id;
     public String ten_dang_nhap;
     public String email;
     public String mat_khau;
     public String ho_ten;
     public String anh_avatar;
-    public int chuc_vu; //vd: 0: khach hang, 1:nhan vien. khong thi doi thanh string cx dc
+    public int chuc_vu; //vd: 0: khách hàng, 1:nhân viên. có thể đổi thành string cx dc
     public String sdt;
     public Date ngay_sinh;
     public int trang_thai;
@@ -19,10 +19,10 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(String _id, String ten_dang_nhap, String email, String mat_khau,
+    public NguoiDung(String id, String ten_dang_nhap, String email, String mat_khau,
                      String ho_ten, String anh_avatar, int chuc_vu, String sdt, Date ngay_sinh,
                      int trang_thai, Date ngay_tao) {
-        this._id = _id;
+        this.id = id;
         this.ten_dang_nhap = ten_dang_nhap;
         this.email = email;
         this.mat_khau = mat_khau;
@@ -36,7 +36,7 @@ public class NguoiDung {
     }
 
     static public NguoiDung timKiemEmail(String email) {
-        //tim trong database
+        //làm sau
         return new NguoiDung();
     }
 }
