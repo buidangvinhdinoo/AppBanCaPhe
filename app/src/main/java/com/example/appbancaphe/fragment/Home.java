@@ -88,7 +88,7 @@ public class Home extends Fragment {
             StringBuilder responnse = new StringBuilder();
             try {
                 URL url = new URL("...");// can link database
-                HTTP
+                //HTTP
             } catch (Exception e){
                 throw new RuntimeException(e);
             }
