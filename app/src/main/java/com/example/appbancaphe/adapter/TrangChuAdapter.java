@@ -18,27 +18,30 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class TrangChuAdapter extends RecyclerView.Adapter<TrangChuAdapter.ViewHolder> {
-    Context context;
+    Activity activity;
     List<Cafe> list;
 
-    public TrangChuAdapter(Context context, List<Cafe> list) {
-        this.context = context;
+    public TrangChuAdapter(Activity activity, List<Cafe> list) {
+        this.activity = activity;
         this.list = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+        LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.item_cafe, parent);
+        if (list.isEmpty()) duLieuMau();
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (list.isEmpty()) duLieuMau();
         Cafe item = list.get(position);
-        if(item.anh != null && !item.anh.isEmpty())
-                Picasso.get().load(item.anh).into(holder.img_cafe);
+        Picasso.get().load(item.anh)
+                .placeholder(R.drawable.default_cafe_img)
+                .into(holder.img_cafe);
         holder.ten_loai.setText(item.loai);
     }
 
@@ -55,5 +58,12 @@ public class TrangChuAdapter extends RecyclerView.Adapter<TrangChuAdapter.ViewHo
             img_cafe = itemView.findViewById(R.id.img_cafe);
             ten_loai = itemView.findViewById(R.id.ten_loai);
         }
+    }
+
+    void duLieuMau() {
+        list.add(new Cafe("cf01", "", "Cafe Nâm", 1, 30000, 1));
+        list.add(new Cafe("cf02", "", "Cafe Đen", 3, 75000, 0));
+        list.add(new Cafe("cf03", "", "Cafe muốn", 2, 35000, 1));
+        list.add(new Cafe("cf04", "", "Cafe chồn", 1, 50000, 1));
     }
 }
