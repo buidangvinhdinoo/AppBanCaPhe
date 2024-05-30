@@ -14,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="5dp"
-        android:src="@drawable/chao" />
+        android:src="@drawable/baseline_logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -127,20 +127,20 @@
         <ImageButton
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/icon3"
+            android:src="@drawable/icon_google"
             android:background="@drawable/uwu3"/>
 
         <ImageButton
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginHorizontal="10dp"
-            android:src="@drawable/icon1"
+            android:src="@drawable/icon_apple"
             android:background="@drawable/uwu3" />
 
         <ImageButton
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/icon2"
+            android:src="@drawable/icon_android"
             android:background="@drawable/uwu3" />
 
     </LinearLayout>

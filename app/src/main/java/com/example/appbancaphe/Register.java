@@ -16,12 +16,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Dki extends AppCompatActivity {
+public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dki);
+        setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
         TextView dkii = findViewById(R.id.dangkiii);
@@ -30,7 +30,7 @@ public class Dki extends AppCompatActivity {
         TextInputEditText mkdki = findViewById(R.id.tieNhapmatkhausignup);
 
         dkii.setOnClickListener(v -> {
-            //startActivity(new Intent(Dki.this, MainActivity.class));
+            //startActivity(new Intent(Register.this, MainActivity.class));
             //khi activity đăng nhập chưa finish
             //nên chỉ cần finish activity đăng kỹ sẽ quay lại activity đăng nhập
             //cách này sẽ tối ưu hơn - huynk ph38086
@@ -43,7 +43,7 @@ public class Dki extends AppCompatActivity {
 
             if (email.isEmpty() || password.isEmpty()) {
                 // Xử lý trường hợp email hoặc mật khẩu rỗng
-                Toast.makeText(Dki.this, "Vui lòng nhập đầy đủ thông tin",
+                Toast.makeText(Register.this, "Vui lòng nhập đầy đủ thông tin",
                         Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -51,16 +51,16 @@ public class Dki extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     FirebaseUser user = mAuth.getCurrentUser();
-                    Toast.makeText(Dki.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Dki.this, MainActivity.class));
+                    Toast.makeText(Register.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Register.this, MainActivity.class));
                     finish();
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     // Kiểm tra nếu là lỗi định dạng email không đúng
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(Dki.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(Dki.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

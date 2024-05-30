@@ -13,8 +13,6 @@ import com.example.appbancaphe.R;
 
 public class Product extends Fragment {
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

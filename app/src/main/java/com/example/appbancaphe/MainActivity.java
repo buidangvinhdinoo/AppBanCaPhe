@@ -11,7 +11,7 @@ import com.example.appbancaphe.databinding.ActivityMainBinding;
 import com.example.appbancaphe.fragment.Cart;
 import com.example.appbancaphe.fragment.Home;
 import com.example.appbancaphe.fragment.Product;
-import com.example.appbancaphe.fragment.TaiKhoan;
+import com.example.appbancaphe.fragment.Account;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (itemId == R.id.btncart) {
                 selectedFragment = new Cart();
             } else if (itemId == R.id.btntaikhoan) {
-                selectedFragment = new TaiKhoan();
+                selectedFragment = new Account();
             }
 
             if (selectedFragment != null) {

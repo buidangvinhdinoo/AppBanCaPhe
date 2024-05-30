@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbancaphe.R;
-import com.example.appbancaphe.adapter.TrangChuAdapter;
+import com.example.appbancaphe.adapter.HomeAdapter;
 import com.example.appbancaphe.model.Cafe;
 import com.example.appbancaphe.model.NguoiDung;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +43,7 @@ public class Home extends Fragment {
     private FirebaseAuth mAuth;
 
     private List<Cafe> cafes;
-    private TrangChuAdapter adapter;
+    private HomeAdapter adapter;
     private RecyclerView rv;
 
     @SuppressLint("SetTextI18n")
@@ -64,7 +64,7 @@ public class Home extends Fragment {
         cafes = new ArrayList<>();
         duLieuMau();
         rv = view.findViewById(R.id.rv);
-        adapter = new TrangChuAdapter(getActivity(), cafes);
+        adapter = new HomeAdapter(getActivity(), cafes);
         rv.setAdapter(adapter);
 
         new FCT();

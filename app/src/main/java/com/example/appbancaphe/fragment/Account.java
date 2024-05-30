@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import com.example.appbancaphe.R;
 
 
-public class TaiKhoan extends Fragment {
+public class Account extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tai_khoan, container, false);
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 }

@@ -23,7 +23,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Dki"
+            android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".Welcom"

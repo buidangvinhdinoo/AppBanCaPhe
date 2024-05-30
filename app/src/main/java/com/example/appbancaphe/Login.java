@@ -9,9 +9,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -73,7 +70,7 @@ public class Login extends AppCompatActivity {
         });
 
         btnsignup.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, Dki.class);
+            Intent intent = new Intent(Login.this, Register.class);
             startActivity(intent);
             //finish();
             //đoạn này ko cần finish đâu - huynk ph38086

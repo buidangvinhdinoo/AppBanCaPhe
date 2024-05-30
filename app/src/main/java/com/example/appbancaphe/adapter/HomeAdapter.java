@@ -1,7 +1,6 @@
 package com.example.appbancaphe.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class TrangChuAdapter extends RecyclerView.Adapter<TrangChuAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     Activity activity;
     List<Cafe> list;
 
-    public TrangChuAdapter(Activity activity, List<Cafe> list) {
+    public HomeAdapter(Activity activity, List<Cafe> list) {
         this.activity = activity;
         this.list = list;
     }
@@ -30,7 +29,7 @@ public class TrangChuAdapter extends RecyclerView.Adapter<TrangChuAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = activity.getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_cafe, parent);
+        View view = inflater.inflate(R.layout.item_in_home, parent);
         if (list.isEmpty()) duLieuMau();
         return new ViewHolder(view);
     }
