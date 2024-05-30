@@ -67,7 +67,7 @@ public class Home extends Fragment {
         adapter = new HomeAdapter(getActivity(), cafes);
         rv.setAdapter(adapter);
 
-        new FCT();
+        new FCT().execute();
 
         images = new int[]{R.drawable.default_banner, R.drawable.banner2, R.drawable.banner3};
         //không nên gán dữ liệu bên ngoài hàm
