@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:gravity="start|top"
     android:padding="14dp"
+    android:background="#EFE4E4"
     tools:context=".fragment.Home">
 
     <TextView
