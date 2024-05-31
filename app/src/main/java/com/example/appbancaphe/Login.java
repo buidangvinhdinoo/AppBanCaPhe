@@ -1,6 +1,7 @@
 package com.example.appbancaphe;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -10,12 +11,15 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,46 +28,44 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         TextInputEditText userdnhap = findViewById(R.id.tieuNhapUsername);
         TextInputEditText mkdnhap = findViewById(R.id.tieNhapmatkhau);
         TextView btnsignup = findViewById(R.id.btnsignup);
         TextView quenmk = findViewById(R.id.forgot);
-        Button signin= findViewById(R.id.btnDangnhap);
+        Button signin = findViewById(R.id.btnDangnhap);
 
         signin.setOnClickListener(v -> {
             String email = userdnhap.getText().toString();
             String password = mkdnhap.getText().toString();
 
-            //tai khoan admin, để đăng nhập test cho nhanh
-            if (email.equals("admin") && password.equals("admin")){
-                Toast.makeText(getApplicationContext(), " Chào admin!",
-                        Toast.LENGTH_LONG).show();
+            // Tài khoản admin, để đăng nhập test nhanh
+            if (email.equals("admin") && password.equals("admin")) {
+                Toast.makeText(getApplicationContext(), "Chào admin!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Login.this, MainActivity.class));
                 finish();
             }
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(Login.this, "Vui lòng nhập đủ thông tin đăng nhập",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Vui lòng nhập đủ thông tin đăng nhập", Toast.LENGTH_SHORT).show();
             } else {
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("Main", "createUserWithEmail:success");
+                        // Đăng nhập thành công, lưu thông tin tài khoản vào SharedPreferences
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(getApplicationContext(), "Đăng nhập thành công",
-                                Toast.LENGTH_LONG).show();
+                        editor.putString("email", email);
+                        editor.putString("password", password);
+                        editor.apply();
+
+                        Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(Login.this, MainActivity.class));
                         finish();
-
-                        //updateUI(user);
                     } else {
-                        // If sign in fails, display a message to the user.
+                        // Đăng nhập thất bại
                         Log.w("Main", "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(Login.this, "Vui lòng kiểm tra lại tài khoản hoặc mậy khẩu",
-                                Toast.LENGTH_SHORT).show();
-
-                        //updateUI(null);
+                        Toast.makeText(Login.this, "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -72,26 +74,21 @@ public class Login extends AppCompatActivity {
         btnsignup.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, Register.class);
             startActivity(intent);
-            //finish();
-            //đoạn này ko cần finish đâu - huynk ph38086
         });
 
         quenmk.setOnClickListener(v -> {
             String email = userdnhap.getText().toString();
             if (email.isEmpty()) {
-                Toast.makeText(Login.this, "Vui lòng nhập email của bạn",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Vui lòng nhập email của bạn", Toast.LENGTH_SHORT).show();
             } else {
                 mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Login.this, "Vui lòng kiểm tra hộp thư email",
-                                Toast.LENGTH_SHORT).show();
-                    }else {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Login.this, "Vui lòng kiểm tra hộp thư email", Toast.LENGTH_SHORT).show();
+                    } else {
                         Toast.makeText(Login.this, "Lỗi gửi email", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
     }
-
-    }
+}

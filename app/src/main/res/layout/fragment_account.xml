@@ -1,15 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFE4E4"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
     tools:context=".fragment.Account">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cart"
+        />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="Poly Coffee"
+        android:fontFamily="@font/itim"
+        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textColor="@color/orange"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admin"
+        android:textSize="40sp"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        />
+    <TextView
+        android:id="@+id/item_infor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thông tin tài khoản"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="-20dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        />
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/item_resetpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi mật khẩu"
+        android:textSize="20sp"
+        android:layout_marginLeft="-48dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/item_thongke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thống kê doanh thu"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="-20dp"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/item_thongkenv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thống kê nhân viên"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="-20dp"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/item_addsanpham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm sản phẩm "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginLeft="-30dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/item_addloaisanpham"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm loại sản phẩm"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginLeft="-20dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/item_addnv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm nhân viên"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="-36dp"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/item_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng Xuất"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="-59dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+
+</LinearLayout>

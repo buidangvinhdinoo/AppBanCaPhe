@@ -23,4 +23,52 @@ public class Cafe {
     public Cafe timKiem(String _id){
         return null; //làm sau
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
+    public String getLoai() {
+        return loai;
+    }
+
+    public void setLoai(String loai) {
+        this.loai = loai;
+    }
+
+    public int getKich_co() {
+        return kich_co;
+    }
+
+    public void setKich_co(int kich_co) {
+        this.kich_co = kich_co;
+    }
+
+    public double getDon_gia() {
+        return don_gia;
+    }
+
+    public void setDon_gia(double don_gia) {
+        this.don_gia = don_gia;
+    }
+
+    public int getTrang_thai() {
+        return trang_thai;
+    }
+
+    public void setTrang_thai(int trang_thai) {
+        this.trang_thai = trang_thai;
+    }
 }

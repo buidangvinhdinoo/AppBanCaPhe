@@ -29,7 +29,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = activity.getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_in_home, parent);
+        View view = inflater.inflate(R.layout.item_in_home, parent, false); // Sửa tại đây: truyền false cho attachToRoot
         if (list.isEmpty()) duLieuMau();
         return new ViewHolder(view);
     }
@@ -38,9 +38,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (list.isEmpty()) duLieuMau();
         Cafe item = list.get(position);
-        Picasso.get().load(item.anh)
-                .placeholder(R.drawable.default_cafe_img)
-                .into(holder.img_cafe);
+
+        if (item.anh != null && !item.anh.isEmpty()) {
+            Picasso.get().load(item.anh)
+                    .placeholder(R.drawable.default_cafe_img)
+                    .into(holder.img_cafe);
+        } else {
+            holder.img_cafe.setImageResource(R.drawable.default_cafe_img); // Sử dụng ảnh mặc định khi đường dẫn ảnh trống hoặc null
+        }
+
         holder.ten_loai.setText(item.loai);
     }
 

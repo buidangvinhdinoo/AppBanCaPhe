@@ -11,7 +11,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_margin="9dp"
-        android:src="@drawable/default_cafe_img"/>
+        android:src="@drawable/default_cafe_img" />
 
     <LinearLayout
         android:layout_width="0dp"

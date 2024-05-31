@@ -1,6 +1,7 @@
 package com.example.appbancaphe;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(new Home());//mặc định
+
+        replaceFragment(new Home());
 
         binding.bottomnav.setOnItemSelectedListener(menuItem -> {
             int itemId = menuItem.getItemId();

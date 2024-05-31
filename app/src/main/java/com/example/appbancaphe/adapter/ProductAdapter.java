@@ -1,12 +1,15 @@
 package com.example.appbancaphe.adapter;
 
 import android.app.Activity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appbancaphe.R;
 import com.example.appbancaphe.model.Cafe;
 
 import java.util.List;
@@ -23,11 +26,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.item_in_product, parent, false); // Sửa tại đây: truyền false cho attachToRoot
+        if (list.isEmpty()) duLieuMau();
+        return new ProductAdapter.ViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (list.isEmpty()) duLieuMau();
+        Cafe item = list.get(position);
+        holder.txttenloai.setText(item.loai);
+        holder.txtgiatien.setText(String.valueOf(item.don_gia));
 
     }
 
@@ -37,8 +48,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView txttenloai;
+        TextView txtgiatien;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            txttenloai = itemView.findViewById(R.id.tv_type);
+            txtgiatien = itemView.findViewById(R.id.tv_price);
+
         }
     }
 
