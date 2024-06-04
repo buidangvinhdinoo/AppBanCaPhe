@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="8dp"
-    tools:context=".fragment.RevenueStatistics">
+    tools:context=".fragment.Revenue">
 
     <TextView
         android:layout_width="match_parent"

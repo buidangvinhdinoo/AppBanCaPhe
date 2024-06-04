@@ -48,7 +48,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/item_resetpass"
+            android:id="@+id/item_repass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -57,7 +57,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/item_thongke"
+            android:id="@+id/item_revenue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -66,7 +66,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/item_thongkenv"
+            android:id="@+id/item_staffs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -75,25 +75,25 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/item_addsanpham"
+            android:id="@+id/item_addcup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Thêm cốc caffe mới"
+            android:text="Thêm cốc cafe mới"
             android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/item_addloaisanpham"
+            android:id="@+id/item_addtype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Thêm loại cup mới"
+            android:text="Thêm loại cafe mới"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/item_addnv"
+            android:id="@+id/item_addstaff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"

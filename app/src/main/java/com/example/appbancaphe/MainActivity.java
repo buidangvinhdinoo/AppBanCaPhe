@@ -25,40 +25,28 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.pageTrangChu);
         loadFragment(new Home());
-
-
-
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            if(item.getItemId() == R.id.pageTrangChu){
-                Home frgHome = new Home();
-                loadFragment(frgHome);
+        if(item.getItemId() == R.id.pageTrangChu){
+            Home frgHome = new Home();
+            loadFragment(frgHome);
+        } else if(item.getItemId() == R.id.pageSanPham){
+            Product frgSp = new Product();
+            loadFragment(frgSp);
+        } else if(item.getItemId() == R.id.pageBanHang){
+            Cart frgst = new Cart();
+            loadFragment(frgst);
+        } else if(item.getItemId() == R.id.pageTaiKhoan){
+            Account frgacc = new Account();
+            loadFragment(frgacc);
+        }
 
-            }else if(item.getItemId() == R.id.pageSanPham){
-                Product frgSp = new Product();
-                loadFragment(frgSp);
-
-            }
-            else if(item.getItemId() == R.id.pageBanHang){
-                Cart frgst = new Cart();
-                loadFragment(frgst);
-
-            }
-            else if(item.getItemId() == R.id.pageTaiKhoan){
-                Account frgacc = new Account();
-                loadFragment(frgacc);
-
-            }
         return true;
-            
-
-
-
     }
-    private void loadFragment(Fragment fragment) {
+
+    public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
