@@ -18,30 +18,20 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Account extends Fragment {
     private FirebaseAuth mAuth;
-    TextView logout;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_account,container,false);
-        logout  =view.findViewById(R.id.item_logout);
 
         mAuth = FirebaseAuth.getInstance();
 
         // Đăng xuất khi người dùng nhấn nút đăng xuất
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
+        view.findViewById(R.id.item_logout).setOnClickListener(v -> signOut());
         return view;
     }
     private void signOut() {
         mAuth.signOut();
-         Intent intent = new Intent(getActivity(),Login.class);
-         startActivity(intent);
-
+        getActivity().finish();
     }
 }
