@@ -16,11 +16,6 @@
         android:layout_margin="8dp"
         android:src="@drawable/ic_baseline_account_circle_24" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_margin="8dp"/>
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,12 +27,12 @@
             android:id="@+id/ed_ten_dn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="45dp"
             android:hint="Tên đăng nhập"
-            android:textSize="20sp"
+            android:inputType="text"
+            android:minHeight="45dp"
             android:textColor="@color/black"
             android:textColorHint="@color/red"
-            android:inputType="text" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,12 +47,12 @@
             android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="45dp"
             android:hint="Email"
-            android:textSize="20sp"
+            android:inputType="text"
+            android:minHeight="45dp"
             android:textColor="@color/black"
             android:textColorHint="@color/red"
-            android:inputType="text" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,12 +67,12 @@
             android:id="@+id/ed_mat_khau"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="45dp"
             android:hint="Mật khẩu"
-            android:textSize="20sp"
+            android:inputType="textPassword"
+            android:minHeight="45dp"
             android:textColor="@color/black"
             android:textColorHint="@color/red"
-            android:inputType="textPassword" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,12 +87,32 @@
             android:id="@+id/ed_ho_ten"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="45dp"
             android:hint="Họ và tên"
-            android:textSize="20sp"
+            android:inputType="text"
+            android:minHeight="45dp"
             android:textColor="@color/black"
             android:textColorHint="@color/red"
-            android:inputType="text" />
+            android:textSize="20sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:paddingHorizontal="40dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_chuc_vu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Chức vụ"
+            android:inputType="text"
+            android:minHeight="45dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/red"
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,12 +127,12 @@
             android:id="@+id/ed_sdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="45dp"
             android:hint="Sđt"
-            android:textSize="20sp"
+            android:inputType="number"
+            android:minHeight="45dp"
             android:textColor="@color/black"
             android:textColorHint="@color/red"
-            android:inputType="number" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,25 +147,38 @@
             android:id="@+id/ed_ngay_sinh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="45dp"
             android:hint="Ngày sinh"
-            android:textSize="20sp"
+            android:inputType="date"
+            android:minHeight="45dp"
             android:textColor="@color/black"
             android:textColorHint="@color/red"
-            android:inputType="date" />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_editing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="24dp"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
         android:layout_margin="8dp"
+        android:background="@drawable/red_background"
+        android:paddingHorizontal="24dp"
         android:text="Chỉnh sửa"
-        android:textSize="18sp"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@drawable/red_background" />
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/red_background"
+        android:paddingHorizontal="24dp"
+        android:text="Hủy"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="invisible" />
 
 </LinearLayout>
