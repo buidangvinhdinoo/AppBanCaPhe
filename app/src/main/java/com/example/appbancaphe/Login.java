@@ -45,10 +45,7 @@ public class Login extends AppCompatActivity {
             if (email.equals("admin") && password.equals("admin")) {
                 Toast.makeText(getApplicationContext(), "Chào admin!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Login.this, MainActivity.class));
-                finish();
-            }
-
-            if (email.isEmpty() || password.isEmpty()) {
+            } else if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(Login.this, "Vui lòng nhập đủ thông tin đăng nhập", Toast.LENGTH_SHORT).show();
             } else {
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
@@ -61,7 +58,6 @@ public class Login extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(Login.this, MainActivity.class));
-                        finish();
                     } else {
                         // Đăng nhập thất bại
                         Log.w("Main", "createUserWithEmail:failure", task.getException());

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbancaphe.R;
 import com.example.appbancaphe.model.Cup;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,9 +40,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (list.isEmpty()) duLieuMau();
         Cup item = list.get(position);
+
+        if (item.anh != null && !item.anh.isEmpty()) {
+            Picasso.get().load(item.anh)
+                    .placeholder(R.drawable.default_cafe_img)
+                    .into(holder.img_anh);
+        } else {
+            holder.img_anh.setImageResource(R.drawable.default_cafe_img); // Sử dụng ảnh mặc định khi đường dẫn ảnh trống hoặc null
+        }
+
         holder.txttenloai.setText(item.loai_id);
         holder.txtgiatien.setText(String.valueOf(item.don_gia));
 
+        holder.ibthemvaogio.setOnClickListener(v -> {});//
+        holder.ibxemchitiet.setOnClickListener(v -> {});//
     }
 
     @Override
@@ -48,14 +62,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txttenloai;
-        TextView txtgiatien;
+        ImageView img_anh;
+        TextView txttenloai,
+                txtgiatien;
+        ImageButton ibthemvaogio,
+                ibxemchitiet;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            img_anh = itemView.findViewById(R.id.iv_img);
             txttenloai = itemView.findViewById(R.id.tv_type);
             txtgiatien = itemView.findViewById(R.id.tv_price);
-
+            ibthemvaogio = itemView.findViewById(R.id.ib_add);
+            ibxemchitiet = itemView.findViewById(R.id.ib_detail);
         }
     }
 
