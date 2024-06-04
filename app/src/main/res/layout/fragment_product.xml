@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="18dp"
         android:gravity="center"
-        android:text="Menu cafe"
+        android:text="Menu cup"
         android:fontFamily="@font/itim"
         android:textSize="36dp"
         android:textColor="@color/red"

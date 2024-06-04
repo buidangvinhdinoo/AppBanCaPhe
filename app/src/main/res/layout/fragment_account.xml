@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#EFE4E4"
     android:orientation="vertical"
-    android:gravity="center|top"
+    android:gravity="center_horizontal"
     android:padding="8dp"
     tools:context=".fragment.Account">
 
@@ -79,8 +79,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Thêm caffe mới"
+            android:text="Thêm cốc caffe mới"
             android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_addloaisanpham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Thêm loại cup mới"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView

@@ -34,7 +34,7 @@
                 android:id="@+id/tv_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="cafe"
+                android:text="cup"
                 android:fontFamily="@font/itim"
                 android:textSize="20sp"
                 android:textColor="@color/black"/>

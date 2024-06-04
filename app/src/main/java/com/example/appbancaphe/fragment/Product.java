@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbancaphe.R;
 import com.example.appbancaphe.adapter.ProductAdapter;
-import com.example.appbancaphe.model.Cafe;
+import com.example.appbancaphe.model.Cup;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Product extends Fragment {
-    private List<Cafe> cafes;
+    private List<Cup> cups;
     private ProductAdapter adapter;
     private RecyclerView rv;
 
@@ -34,10 +34,10 @@ public class Product extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-        cafes = new ArrayList<>();
+        cups = new ArrayList<>();
         duLieuMau();
         rv = view.findViewById(R.id.rv);
-        adapter = new ProductAdapter(getActivity(), cafes);
+        adapter = new ProductAdapter(getActivity(), cups);
         rv.setAdapter(adapter);
 
         new FPT();
@@ -68,18 +68,18 @@ public class Product extends Fragment {
             if(s != null && !s.isEmpty()) {
                 try {
                     JSONObject json = new JSONObject(s);
-                    JSONArray array = json.getJSONArray("cafes");
+                    JSONArray array = json.getJSONArray("cups");
                     for(int i = 0; i <= array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        Cafe cafe = new Cafe();
-                        cafe.id = object.getString("id");
-                        cafe.anh = object.getString("anh");
-                        cafe.loai = object.getString("loai");
-                        cafe.kich_co = object.getInt("kich_co");
-                        cafe.don_gia = object.getDouble("don_gia");
-                        cafe.trang_thai = object.getInt("trang_thai");
+                        Cup cup = new Cup();
+                        cup.id = object.getString("id");
+                        cup.anh = object.getString("anh");
+                        cup.loai_id = object.getString("loai");
+                        cup.kich_co = object.getInt("kich_co");
+                        cup.don_gia = object.getDouble("don_gia");
+                        cup.trang_thai = object.getInt("trang_thai");
                         //lưu ý: nhớ để ý viết đúng tên trường
-                        cafes.add(cafe);
+                        cups.add(cup);
                     }
                     adapter.notifyDataSetChanged();
                 } catch (Exception e){
@@ -93,9 +93,9 @@ public class Product extends Fragment {
     }
 
     void duLieuMau() {
-        cafes.add(new Cafe("cf01", "", "Cafe Nâm", 1, 30000, 1));
-        cafes.add(new Cafe("cf02", "", "Cafe Đen", 3, 75000, 0));
-        cafes.add(new Cafe("cf03", "", "Cafe muốn", 2, 35000, 1));
-        cafes.add(new Cafe("cf04", "", "Cafe chồn", 1, 50000, 1));
+        cups.add(new Cup("cf01", "", "Cup Nâm", 1, 30000, 1));
+        cups.add(new Cup("cf02", "", "Cup Đen", 3, 75000, 0));
+        cups.add(new Cup("cf03", "", "Cup muốn", 2, 35000, 1));
+        cups.add(new Cup("cf04", "", "Cup chồn", 1, 50000, 1));
     }
 }

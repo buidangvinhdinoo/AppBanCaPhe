@@ -6,95 +6,23 @@
     android:layout_height="match_parent"
     android:background="#EFE4E4"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:padding="8dp"
     tools:context=".fragment.MoreCoffee">
-    
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:padding="60dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/ic_cloud_upload"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:text="Tên cafe: "
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/red" />
-        <Spinner
-            android:id="@+id/loai_cafe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:background="@drawable/gray_background" />
-    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/gray_background"
-        app:hintEnabled="false">
+        app:hintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_co"
+            android:id="@+id/edt_ten"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="Kích cỡ"
-            android:inputType="number"
-            android:minHeight="45dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/red"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/gray_background"
-        app:hintEnabled="false">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_gia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Đơn giá"
-            android:inputType="number"
-            android:minHeight="45dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/red"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/gray_background"
-        app:hintEnabled="false">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_sl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Số lượng"
+            android:hint="Tên loại"
             android:inputType="number"
             android:minHeight="45dp"
             android:textColor="@color/black"

@@ -1,40 +1,23 @@
 package com.example.appbancaphe.fragment;
 
-import static com.example.appbancaphe.model.NguoiDung.timKiemEmail;
-
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appbancaphe.R;
 import com.example.appbancaphe.adapter.HomeAdapter;
-import com.example.appbancaphe.model.Cafe;
-import com.example.appbancaphe.model.NguoiDung;
+import com.example.appbancaphe.model.Cup;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends Fragment {
@@ -44,7 +27,7 @@ public class Home extends Fragment {
     private Handler handler;
     private FirebaseAuth mAuth;
 
-    private List<Cafe> cafes;
+    private List<Cup> cups;
     private HomeAdapter adapter;
     private RecyclerView rv;
 
@@ -64,7 +47,7 @@ public class Home extends Fragment {
 //                xinChao.setText("Ngày mới tốt lành, " + nguoiDung.ten_dang_nhap + "!");
 //        }
 //
-//        cafes = new ArrayList<>();
+//        cups = new ArrayList<>();
 //        duLieuMau();
 //        rv = view.findViewById(R.id.rcvbanchay);
 //
@@ -72,7 +55,7 @@ public class Home extends Fragment {
 //            Log.e("HomeFragment", "RecyclerView is null");
 //        } else {
 //            rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-//            adapter = new HomeAdapter(getActivity(), cafes);
+//            adapter = new HomeAdapter(getActivity(), cups);
 //            rv.setAdapter(adapter);
 //        }
 //
@@ -124,17 +107,17 @@ public class Home extends Fragment {
 //            if (s != null && !s.isEmpty()) {
 //                try {
 //                    JSONObject json = new JSONObject(s);
-//                    JSONArray array = json.getJSONArray("cafes");
+//                    JSONArray array = json.getJSONArray("cups");
 //                    for (int i = 0; i < array.length(); i++) {
 //                        JSONObject object = array.getJSONObject(i);
-//                        Cafe cafe = new Cafe();
+//                        Cup cafe = new Cup();
 //                        cafe.id = object.getString("id");
 //                        cafe.anh = object.getString("anh");
 //                        cafe.loai = object.getString("loai");
 //                        cafe.kich_co = object.getInt("kich_co");
 //                        cafe.don_gia = object.getDouble("don_gia");
 //                        cafe.trang_thai = object.getInt("trang_thai");
-//                        cafes.add(cafe);
+//                        cups.add(cafe);
 //                    }
 //                    adapter.notifyDataSetChanged();
 //                } catch (Exception e) {
@@ -147,10 +130,10 @@ public class Home extends Fragment {
 //    }
 //
 //    void duLieuMau() {
-//        cafes.add(new Cafe("cf01", "", "Cafe Nâm", 1, 30000, 1));
-//        cafes.add(new Cafe("cf02", "", "Cafe Đen", 3, 75000, 0));
-//        cafes.add(new Cafe("cf03", "", "Cafe muốn", 2, 35000, 1));
-//        cafes.add(new Cafe("cf04", "", "Cafe chồn", 1, 50000, 1));
+//        cups.add(new Cup("cf01", "", "Cup Nâm", 1, 30000, 1));
+//        cups.add(new Cup("cf02", "", "Cup Đen", 3, 75000, 0));
+//        cups.add(new Cup("cf03", "", "Cup muốn", 2, 35000, 1));
+//        cups.add(new Cup("cf04", "", "Cup chồn", 1, 50000, 1));
 //    }
     }
 }
