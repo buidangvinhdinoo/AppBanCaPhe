@@ -151,6 +151,6 @@
         android:textSize="18sp"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@drawable/red_button" />
+        android:background="@drawable/red_background" />
 
 </LinearLayout>
