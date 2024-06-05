@@ -7,7 +7,9 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="8dp"
+    android:id="@+id/frame_container"
     tools:context=".fragment.Account">
+
 
     <ImageView
         android:layout_width="150dp"
