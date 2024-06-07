@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.bancaphe.DAOModel.DAOUser;
-import com.example.bancaphe.Model.User;
+import com.example.appbancaphe.DAOModel.DAOUser;
+import com.example.appbancaphe.Model.User;
 
 import java.util.ArrayList;
 

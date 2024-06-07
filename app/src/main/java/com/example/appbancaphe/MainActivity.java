@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.appbancaphe.fragment.Home;
-import com.example.appbancaphe.fragment.Product;
-import com.example.appbancaphe.fragment.Cart;
+import com.example.appbancaphe.FragmentManager.Account_Fragment;
+import com.example.appbancaphe.FragmentManager.HomeFrgm;
+import com.example.appbancaphe.FragmentManager.ProductFrgm;
+import com.example.appbancaphe.FragmentManager.StoreFrgm;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -23,29 +24,41 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.pageTrangChu);
-        loadFragment(new Home());
+        loadFragment(new HomeFrgm());
+
+
+
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.pageTrangChu){
-            Home frgHome = new Home();
-            loadFragment(frgHome);
-        } else if(item.getItemId() == R.id.pageSanPham){
-            Product frgSp = new Product();
-            loadFragment(frgSp);
-        } else if(item.getItemId() == R.id.pageBanHang){
-            Cart frgst = new Cart();
-            loadFragment(frgst);
-        } else if(item.getItemId() == R.id.pageTaiKhoan){
-            Account frgacc = new Account();
-            loadFragment(frgacc);
-        }
+            if(item.getItemId() == R.id.pageTrangChu){
+                HomeFrgm frgHome = new HomeFrgm();
+                loadFragment(frgHome);
 
+            }else if(item.getItemId() == R.id.pageSanPham){
+                ProductFrgm frgSp = new ProductFrgm();
+                loadFragment(frgSp);
+
+            }
+            else if(item.getItemId() == R.id.pageBanHang){
+                StoreFrgm frgst = new StoreFrgm();
+                loadFragment(frgst);
+
+            }
+            else if(item.getItemId() == R.id.pageTaiKhoan){
+                Account_Fragment frgacc = new Account_Fragment();
+                loadFragment(frgacc);
+
+            }
         return true;
-    }
+            
 
-    public void loadFragment(Fragment fragment) {
+
+
+    }
+    private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
