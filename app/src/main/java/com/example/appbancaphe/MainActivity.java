@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.appbancaphe.fragment.Account;
 import com.example.appbancaphe.fragment.Home;
 import com.example.appbancaphe.fragment.Product;
 import com.example.appbancaphe.fragment.Cart;
