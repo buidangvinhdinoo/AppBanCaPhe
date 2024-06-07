@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.bancaphe.Database.DbHelper;
-import com.example.bancaphe.Model.LuuHoaDon;
+import com.example.appbancaphe.Database.DbHelper;
+import com.example.appbancaphe.Model.LuuHoaDon;
 
 import java.util.ArrayList;
 

@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
-import com.example.bancaphe.Database.DbHelper;
-import com.example.bancaphe.Model.SanPham;
-import com.example.bancaphe.Model.TheLoai;
+import com.example.appbancaphe.Database.DbHelper;
+import com.example.appbancaphe.Model.SanPham;
+import com.example.appbancaphe.Model.TheLoai;
 
 import java.util.ArrayList;
 
