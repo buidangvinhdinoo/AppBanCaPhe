@@ -42,12 +42,7 @@ public class DoiMKFrgm extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doi_m_k_frgm, container, false);
         ImageView btnBackDoiMK = view.findViewById(R.id.btnBackDoiMK);
-        btnBackDoiMK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new Account_Fragment());
-            }
-        });
+        btnBackDoiMK.setOnClickListener(v -> loadFragment(new Account_Fragment()));
         return view;
     }
 
@@ -66,104 +61,79 @@ public class DoiMKFrgm extends Fragment {
         daoUser = new DAOUser(getActivity());
 
         //set hide pass
-        imgHide1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edOldPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                    edOldPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    imgHide1.setImageResource(R.drawable.ic_hide_on);
-                } else {
-                    edOldPass.setInputType(129);
-                    imgHide1.setImageResource(R.drawable.ic_visibility_off);
-                }
+        imgHide1.setOnClickListener(v -> {
+            if (edOldPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                edOldPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imgHide1.setImageResource(R.drawable.ic_hide_on);
+            } else {
+                edOldPass.setInputType(129);
+                imgHide1.setImageResource(R.drawable.ic_visibility_off);
             }
         });
-        imgHide2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edNewPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                    edNewPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    imgHide2.setImageResource(R.drawable.ic_hide_on);
-                } else {
-                    edNewPass.setInputType(129);
-                    imgHide2.setImageResource(R.drawable.ic_visibility_off);
-                }
+        imgHide2.setOnClickListener(v -> {
+            if (edNewPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                edNewPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imgHide2.setImageResource(R.drawable.ic_hide_on);
+            } else {
+                edNewPass.setInputType(129);
+                imgHide2.setImageResource(R.drawable.ic_visibility_off);
             }
         });
-        imgHide3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edConfirmPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                    edConfirmPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    imgHide3.setImageResource(R.drawable.ic_hide_on);
-                } else {
-                    edConfirmPass.setInputType(129);
-                    imgHide3.setImageResource(R.drawable.ic_visibility_off);
-                }
+        imgHide3.setOnClickListener(v -> {
+            if (edConfirmPass.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                edConfirmPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imgHide3.setImageResource(R.drawable.ic_hide_on);
+            } else {
+                edConfirmPass.setInputType(129);
+                imgHide3.setImageResource(R.drawable.ic_visibility_off);
             }
         });
         getDataSSR();
 
 //        Sự kiện Button Hủy
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetForm();
-            }
-        });
+        btnCancel.setOnClickListener(v -> resetForm());
 
 //        Sự kiện Button đổi mật khẩu
-        btnChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        btnChange.setOnClickListener(v -> {
 //                Get Data từ Edittext;
-                oldPass = edOldPass.getText().toString();
-                newPass = edNewPass.getText().toString();
-                confirmPass = edConfirmPass.getText().toString();
+            oldPass = edOldPass.getText().toString();
+            newPass = edNewPass.getText().toString();
+            confirmPass = edConfirmPass.getText().toString();
 
-                if (checkEdt()) {
+            if (checkEdt()) {
+                Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_confirm);
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                    Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_confirm);
-                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
 
-                    TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
-                    EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
-                    EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
-
-                    dialog_confirm_content.setText("Bạn chắc chắn muốn sửa đổi mật khẩu!");
+                dialog_confirm_content.setText("Bạn chắc chắn muốn sửa đổi mật khẩu!");
 
 //                    Set Click Dialog Hủy
-                    btnDialogHuy.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
+                btnDialogHuy.setOnClickListener(v1 -> {
+                    Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
 
 //                    Set Click Dialog Xác Nhận
-                    btnDialogXN.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            User user = daoUser.getUser(maUser);
-                            user.setPassword(newPass);
-                            boolean checkUpdate = daoUser.updateUser(user);
-                            if (checkUpdate) {
-                                Toast.makeText(getActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                                remmemberUser(username, newPass, chkCheck);
-                                getDataSSR();
-                                loadFragment(new Account_Fragment());
-                            } else {
-                                Toast.makeText(getActivity(), "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
-                            }
-                            dialog.dismiss();
-                        }
-                    });
-                    dialog.show();
-                }
+                btnDialogXN.setOnClickListener(v12 -> {
+                    User user = daoUser.getUser(maUser);
+                    user.setPassword(newPass);
+                    boolean checkUpdate = daoUser.updateUser(user);
+                    if (checkUpdate) {
+                        Toast.makeText(getActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                        remmemberUser(username, newPass, chkCheck);
+                        getDataSSR();
+                        loadFragment(new Account_Fragment());
+                    } else {
+                        Toast.makeText(getActivity(), "Đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                    dialog.dismiss();
+                });
+                dialog.show();
             }
         });
     }
@@ -210,13 +180,6 @@ public class DoiMKFrgm extends Fragment {
         return checkAdd;
     }
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
     private void remmemberUser(String u, String p, boolean status) {
         SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -253,6 +216,13 @@ public class DoiMKFrgm extends Fragment {
         edConfirmPass.setHintTextColor(Color.BLACK);
         edConfirmPass.setTextColor(Color.BLACK);
         edConfirmPass.setError(null);
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

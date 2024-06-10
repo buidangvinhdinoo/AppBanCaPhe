@@ -58,65 +58,39 @@ public class ChiTietSPFrgm extends Fragment {
         RadioButton rdoSizeNho = view.findViewById(R.id.rdoSizeNho);
 
 //        Set kích thước Size
-
         double donGiaGoc = sanPham.getPrice();
         rdoSizeNho.setChecked(true);
         sizeCheck = "M";
         donGia = 0;
 
-        rdoSizeLon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    rdoSizeNho.setChecked(false);
-                    sizeCheck = "L";
-                    donGia = 16000;
-                    tongTien = tinhTien(soLuong, donGia, donGiaGoc);
-                    String mTinhTien = String.format("%,.0f", tongTien);
-                    txtChiTietTongTien.setText(mTinhTien + " VNĐ");
-                }
+        rdoSizeLon.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                rdoSizeNho.setChecked(false);
+                sizeCheck = "L";
+                donGia = 16000;
+                tongTien = tinhTien(soLuong, donGia, donGiaGoc);
+                String mTinhTien = String.format("%,.0f", tongTien);
+                txtChiTietTongTien.setText(mTinhTien + " VNĐ");
             }
         });
 
-        rdoSizeNho.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    rdoSizeLon.setChecked(false);
-                    sizeCheck = "M";
-                    donGia = 0;
-                    tongTien = tinhTien(soLuong, donGia, donGiaGoc);
-                    String mTinhTien = String.format("%,.0f", tongTien);
-                    txtChiTietTongTien.setText(mTinhTien + " VNĐ");
-                }
+        rdoSizeNho.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                rdoSizeLon.setChecked(false);
+                sizeCheck = "M";
+                donGia = 0;
+                tongTien = tinhTien(soLuong, donGia, donGiaGoc);
+                String mTinhTien = String.format("%,.0f", tongTien);
+                txtChiTietTongTien.setText(mTinhTien + " VNĐ");
             }
         });
 
 //        Set số lượng
         soLuong = 1;
         txtChiTietSL.setText("0" + soLuong);
-        btnSoLuongGiam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (soLuong > 1){
-                    soLuong --;
-                    if (soLuong < 10){
-                        txtChiTietSL.setText("0" + soLuong);
-                    }
-                    else {
-                        txtChiTietSL.setText(soLuong + "");
-                    }
-                    tongTien = tinhTien(soLuong, donGia, donGiaGoc);
-                    String mTinhTien = String.format("%,.0f", tongTien);
-                    txtChiTietTongTien.setText(mTinhTien + " VNĐ");
-                }
-            }
-        });
-
-        btnSoLuongTang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                soLuong++;
+        btnSoLuongGiam.setOnClickListener(v -> {
+            if (soLuong > 1){
+                soLuong --;
                 if (soLuong < 10){
                     txtChiTietSL.setText("0" + soLuong);
                 }
@@ -129,15 +103,26 @@ public class ChiTietSPFrgm extends Fragment {
             }
         });
 
-//        Set Data cho các View
+        btnSoLuongTang.setOnClickListener(v -> {
+            soLuong++;
+            if (soLuong < 10){
+                txtChiTietSL.setText("0" + soLuong);
+            }
+            else {
+                txtChiTietSL.setText(soLuong + "");
+            }
+            tongTien = tinhTien(soLuong, donGia, donGiaGoc);
+            String mTinhTien = String.format("%,.0f", tongTien);
+            txtChiTietTongTien.setText(mTinhTien + " VNĐ");
+        });
 
+//        Set Data cho các View
         txtChiTietTenSp.setText(sanPham.getTenSanPham());
         double giaSP = sanPham.getPrice();
         String mGiaSP = String.format("%,.0f", giaSP);
         txtChiTietGiaSP.setText(mGiaSP + " VNĐ");
         txtChiTietMoTaSP.setText(sanPham.getMota());
         Picasso.get().load(sanPham.getImage()).into(img_sp);
-
 
         tongTien = tinhTien(soLuong, donGia, donGiaGoc);
         String mTinhTien = String.format("%,.0f", tongTien);
@@ -146,37 +131,34 @@ public class ChiTietSPFrgm extends Fragment {
         EditText btnChiTietAddToCart = view.findViewById(R.id.btnChiTietAddToCart);
 
 //        Thêm sự kiện Button Add
-        btnChiTietAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GioHang gioHang = new GioHang(1, sanPham.getId(), soLuong, sizeCheck, donGia + donGiaGoc);
-                ArrayList<GioHang> outList = daoGioHang.checkValidGioHang(gioHang);
-                if (outList.size() != 0){
+        btnChiTietAddToCart.setOnClickListener(v -> {
+            GioHang gioHang = new GioHang(1, sanPham.getId(), soLuong, sizeCheck, donGia + donGiaGoc);
+            ArrayList<GioHang> outList = daoGioHang.checkValidGioHang(gioHang);
+            if (outList.size() != 0){
 //                - Có: Update số lượng
-                    GioHang gioHang1 = outList.get(0);
-                    int newSL = gioHang1.getSoLuong() + gioHang.getSoLuong();
-                    gioHang.setSoLuong(newSL);
-                    boolean kiemtra = daoGioHang.updateGioHang(gioHang);
-                    if (kiemtra){
-                        Toast.makeText(getContext(), "Thêm sản phẩm thành công!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(getContext(), "Update SL Fail!", Toast.LENGTH_SHORT).show();
-                    }
+                GioHang gioHang1 = outList.get(0);
+                int newSL = gioHang1.getSoLuong() + gioHang.getSoLuong();
+                gioHang.setSoLuong(newSL);
+                boolean kiemtra = daoGioHang.updateGioHang(gioHang);
+                if (kiemtra){
+                    Toast.makeText(getContext(), "Thêm sản phẩm thành công!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-//                - Không: Thêm sản phẩm
-                    boolean check = daoGioHang.addGiohang(gioHang);
-                    if (check){
-                        Toast.makeText(getContext(), "Thêm sản phẩm thành công!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(getContext(), "Fail!", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getContext(), "Update SL Fail!", Toast.LENGTH_SHORT).show();
                 }
-                loadFragment(new StoreFrgm());
-                MainActivity.bottomNavigationView.setSelectedItemId(R.id.pageBanHang);
             }
+            else {
+//                - Không: Thêm sản phẩm
+                boolean check = daoGioHang.addGiohang(gioHang);
+                if (check){
+                    Toast.makeText(getContext(), "Thêm sản phẩm thành công!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getContext(), "Fail!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            loadFragment(new StoreFrgm());
+            MainActivity.bottomNavigationView.setSelectedItemId(R.id.pageBanHang);
         });
 
         return view;
@@ -190,7 +172,7 @@ public class ChiTietSPFrgm extends Fragment {
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

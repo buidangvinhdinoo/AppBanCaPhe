@@ -23,7 +23,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder>{
-
     private ArrayList<SanPham> list;
     private Context context;
 
@@ -45,12 +44,9 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder>{
         SanPham sanPham = list.get(position);
         Picasso.get().load(sanPham.getImage()).into(holder.itemSpHomeImg);
         holder.itemSpHomeTen.setText(sanPham.getTenSanPham());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.bottomNavigationView.setSelectedItemId(R.id.pageSanPham);
-                loadFragment(new ChiTietSPFrgm(sanPham));
-            }
+        holder.itemView.setOnClickListener(v -> {
+            MainActivity.bottomNavigationView.setSelectedItemId(R.id.pageSanPham);
+            loadFragment(new ChiTietSPFrgm(sanPham));
         });
     }
 

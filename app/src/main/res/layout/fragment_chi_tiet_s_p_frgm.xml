@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/floatAddToCard"
-        >
+        android:layout_above="@+id/floatAddToCard">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
                 android:orientation="horizontal"
-                android:weightSum="1"
-                >
+                android:weightSum="1">
 
 
                 <ImageView
@@ -30,11 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/bac_xiu"
-                    android:outlineProvider="background"
-
-                    />
-
-
+                    android:outlineProvider="background" />
 
             </LinearLayout>
 
@@ -50,7 +42,7 @@
                     style="@style/edt_Label"
                     android:text="Something Tên SP"
                     android:textColor="@color/black"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtChiTietGiaSP"
@@ -99,8 +91,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:gravity="fill_horizontal"
-                            >
+                            android:gravity="fill_horizontal">
 
                             <RadioButton
                                 android:id="@+id/rdoSizeLon"
@@ -109,8 +100,7 @@
                                 android:layout_height="30dp"
                                 android:textSize="20dp"
                                 android:paddingLeft="10dp"
-                                android:text="Lớn" >
-
+                                android:text="Lớn">
 
                             </RadioButton>
 
@@ -122,29 +112,23 @@
                                 android:fontFamily="@font/ct_font_medium"
                                 android:textColor="@color/black"
                                 android:textAlignment="textEnd"
-                                android:paddingRight="20dp"
-                                />
+                                android:paddingRight="20dp" />
 
                         </LinearLayout>
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:gravity="fill_horizontal">-->
+
+<!--                        </LinearLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:gravity="fill_horizontal"
-                            >
-
-
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="fill_horizontal"
-                            >
+                            android:gravity="fill_horizontal">
 
                             <RadioButton
                                 android:id="@+id/rdoSizeNho"
@@ -163,19 +147,19 @@
                                 android:fontFamily="@font/ct_font_medium"
                                 android:textColor="@color/black"
                                 android:textAlignment="textEnd"
-                                android:paddingRight="20dp"
-                                />
+                                android:paddingRight="20dp" />
 
                         </LinearLayout>
+
                     </RadioGroup>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    >
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         style="@style/edt_Label"
@@ -188,21 +172,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:paddingRight="20dp"
-                        >
+                        android:paddingRight="20dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            >
+                            android:gravity="center">
 
                             <ImageView
                                 android:id="@+id/btnSoLuongGiam"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_remove_2"
-                                />
+                                android:src="@drawable/ic_remove_2" />
 
                             <TextView
                                 android:id="@+id/txtChiTietSL"
@@ -217,13 +198,11 @@
                                 android:id="@+id/btnSoLuongTang"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_add_circle"
-                                />
+                                android:src="@drawable/ic_add_circle" />
 
                         </LinearLayout>
 
                     </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -265,15 +244,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="3dp"
-            >
+            android:paddingTop="3dp">
 
             <TextView
                 style="@style/edt_Label"
@@ -281,8 +258,7 @@
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                />
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:id="@+id/txtChiTietTongTien"
@@ -293,8 +269,8 @@
                 android:text="Tổng tiền"
                 android:textColor="@color/red"
                 android:textSize="25dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -303,8 +279,7 @@
             android:gravity="end"
             android:paddingRight="20dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            >
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/btnChiTietAddToCart"
@@ -322,8 +297,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:editable="false"
-                android:focusable="false"
-                />
+                android:focusable="false" />
 
         </LinearLayout>
 

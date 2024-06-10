@@ -5,17 +5,14 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp"
-    >
+    android:layout_marginRight="30dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/ct_dialog"
-        android:gravity="center_vertical"
-        >
-
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/txtHoaDonTitle"
@@ -51,6 +48,7 @@
                 android:textColor="@color/white"
                 android:textSize="13dp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -76,6 +74,7 @@
                 android:textColor="@color/white"
                 android:textSize="13dp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -101,6 +100,7 @@
                 android:textColor="@color/white"
                 android:textSize="13dp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -138,6 +138,7 @@
                 android:textColor="@color/white"
                 android:textSize="14dp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -159,15 +160,13 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:weightSum="2"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -175,8 +174,7 @@
                     android:text="Tổng tiền"
                     android:textColor="@color/white"
                     android:textSize="15dp"
-                    android:fontFamily="@font/ct_font_medium"
-                    />
+                    android:fontFamily="@font/ct_font_medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,9 +182,7 @@
                     android:text="Thanh toán"
                     android:textColor="@color/white"
                     android:textSize="15dp"
-                    android:fontFamily="@font/ct_font_medium"
-                    />
-
+                    android:fontFamily="@font/ct_font_medium" />
 
             </LinearLayout>
 
@@ -201,6 +197,7 @@
                 android:textSize="20dp"
                 android:fontFamily="@font/ct_font_bold"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -208,8 +205,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            >
+            android:layout_marginTop="15dp">
 
             <EditText
                 android:id="@+id/btnHoaDonHuy"
@@ -229,8 +225,7 @@
                 android:paddingRight="5dp"
                 android:editable="false"
                 android:focusable="false"
-                android:layout_marginRight="15dp"
-                />
+                android:layout_marginRight="15dp" />
 
             <EditText
                 android:id="@+id/btnHoaDonXN"
@@ -249,8 +244,8 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:editable="false"
-                android:focusable="false"
-                />
+                android:focusable="false" />
+
         </LinearLayout>
 
     </LinearLayout>

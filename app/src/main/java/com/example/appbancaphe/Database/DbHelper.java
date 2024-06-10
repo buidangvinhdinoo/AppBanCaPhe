@@ -92,20 +92,23 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String dropLoaiSP = "drop table if exists THELOAI";
-        db.execSQL(dropLoaiSP);
-        String dropSanPham = "drop table if exists SanPham";
-        db.execSQL(dropSanPham);
-        String dropChucVu = "drop table if exists ChucVu";
-        db.execSQL(dropChucVu);
-        String dropUser = "drop table if exists User";
-        db.execSQL(dropUser);
-        String dropHoaDon = "drop table if exists HoaDon";
-        db.execSQL(dropHoaDon);
-        String dropLuuHoaDon = "drop table if exists LuuHoaDon";
-        db.execSQL(dropLuuHoaDon);
-        String dropGioHang = "drop table if exists GioHang";
-        db.execSQL(dropGioHang);
+        if (newVersion > oldVersion){
+            String dropLoaiSP = "drop table if exists THELOAI";
+            db.execSQL(dropLoaiSP);
+            String dropSanPham = "drop table if exists SanPham";
+            db.execSQL(dropSanPham);
+            String dropChucVu = "drop table if exists ChucVu";
+            db.execSQL(dropChucVu);
+            String dropUser = "drop table if exists User";
+            db.execSQL(dropUser);
+            String dropHoaDon = "drop table if exists HoaDon";
+            db.execSQL(dropHoaDon);
+            String dropLuuHoaDon = "drop table if exists LuuHoaDon";
+            db.execSQL(dropLuuHoaDon);
+            String dropGioHang = "drop table if exists GioHang";
+            db.execSQL(dropGioHang);
+            onCreate(db);
+        }
     }
 
 }

@@ -41,6 +41,7 @@ public class DAOLuuHD {
             return true;
         }
     }
+
     //    Thống kê nhân viên và doanh thu theo từng nhân viên
     public ArrayList<LuuHoaDon> tkNhanVien(){
         ArrayList<LuuHoaDon> listTKNV = new ArrayList<>();
@@ -62,8 +63,8 @@ public class DAOLuuHD {
         }
         return listTKNV;
     }
-//    Lấy tổng doanh thu theo khoảng thời gian
 
+    //    Lấy tổng doanh thu theo khoảng thời gian
     public  double getTongDoanhThu(String dStart, String dEnd, int caseTK, int maUserInput){
         double tongDT=0;
         Cursor cursor= null;
@@ -82,6 +83,7 @@ public class DAOLuuHD {
         }
         return tongDT;
     }
+
     //    Lấy tổng doanh thu theo khoảng thời gian
     public double getAllDoanhThu(int caseTK, int maUserInput){
         double tongDT=0;
@@ -99,9 +101,10 @@ public class DAOLuuHD {
         }
         return tongDT;
     }
-    //    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
-//    Lấy doanh thu theo khoảng thời gian
 
+    //    Lấy danh sách Hóa đơn + Doanh thu theo mã hóa đơn
+
+    //    Lấy doanh thu theo khoảng thời gian
     public  ArrayList<LuuHoaDon> getDSHoaDon(String dStart, String dEnd, int caseTK, int maUserInput){
         ArrayList<LuuHoaDon> listHD= new ArrayList<>();
         Cursor cursor= null;
@@ -127,6 +130,7 @@ public class DAOLuuHD {
         }
         return listHD;
     }
+
     //    Lấy danh sách tất cả Hóa đơn + Doanh thu theo mã hóa đơn
     public  ArrayList<LuuHoaDon> getAllHoaDon(int caseTK, int maUserInput){
         ArrayList<LuuHoaDon> listHD= new ArrayList<>();
@@ -149,6 +153,7 @@ public class DAOLuuHD {
         }
         return listHD;
     }
+
     //    Lấy hóa đơn theo mã hóa đơn
     public ArrayList<LuuHoaDon> getHDofMaHD(int maHD){
         ArrayList<LuuHoaDon> list= new ArrayList<>();
@@ -170,8 +175,8 @@ public class DAOLuuHD {
         }
         return list;
     }
-    //    Lấy tổng thu hóa đơn theo mã hóa đơn
 
+    //    Lấy tổng thu hóa đơn theo mã hóa đơn
     public  double tongThuHD(int maHD){
         double tongThu =0;
         Cursor cursor= database.rawQuery("Select sum(LuuHoaDon.soluong * LuuHoaDon.dongia) from LuuHoaDon where LuuHoaDon.mahoadon =?", new String[]{String.valueOf(maHD)});
@@ -181,6 +186,7 @@ public class DAOLuuHD {
         }
         return tongThu;
     }
+
     //    Get SP bán chạy
     public ArrayList<Integer> getTopSp(){
         ArrayList<Integer> listMaSP= new ArrayList<>();

@@ -33,12 +33,7 @@ public class ThemNhanVienFrgm extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_them_nhan_vien_frgm, container, false);
         ImageView btnBackThemNV = view.findViewById(R.id.btnBackThemNV);
-        btnBackThemNV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new Account_Fragment());
-            }
-        });
+        btnBackThemNV.setOnClickListener(v -> loadFragment(new Account_Fragment()));
         return view;
     }
 
@@ -56,54 +51,39 @@ public class ThemNhanVienFrgm extends Fragment {
         btnHuyThemNV = view.findViewById(R.id.btnHuyThemNV);
         daoUser = new DAOUser(getActivity());
 //        Sự kiện Button Thêm OnClick
-        btnAddThemNV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnAddThemNV.setOnClickListener(v -> {
 //                Khởi tạo Model
 
-                String fullName = edtName.getText().toString();
-                String userName = edtUser.getText().toString();
-                String passWord = edtPassword.getText().toString();
-                String userSDT = edtSDT.getText().toString();
-                String namSinh = edtNamSinh.getText().toString();
+            String fullName = edtName.getText().toString();
+            String userName = edtUser.getText().toString();
+            String passWord = edtPassword.getText().toString();
+            String userSDT = edtSDT.getText().toString();
+            String namSinh = edtNamSinh.getText().toString();
 
 //                Check Form
-                if (checkEdt()) {
+            if (checkEdt()) {
 //                    Kiểm tra trùng lặp UserName
-                    int checkValid = daoUser.checkValid(userName);
-                    if (checkValid != 0) {
+                int checkValid = daoUser.checkValid(userName);
+                if (checkValid != 0) {
 //                        UserName đã tồn tại -> Thông báo lỗi, Nhập lại
-                        Toast.makeText(getContext(), "Tên tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
-                        edtUser.setTextColor(Color.RED);
-                        edtUser.setError("UserName đã tồn tại.");
-                    } else {
+                    Toast.makeText(getContext(), "Tên tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
+                    edtUser.setTextColor(Color.RED);
+                    edtUser.setError("UserName đã tồn tại.");
+                } else {
 //                        UserName chưa tồn tại -> Thêm Account
-                        int mNamSinh = Integer.parseInt(namSinh);
-                        User user = new User(fullName, userName, passWord, 2, userSDT, mNamSinh);
-                        if (daoUser.insertUser(user) < 0) {
-                            Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            resetEdt();
-                        }
+                    int mNamSinh = Integer.parseInt(namSinh);
+                    User user = new User(fullName, userName, passWord, 2, userSDT, mNamSinh);
+                    if (daoUser.insertUser(user) < 0) {
+                        Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        resetEdt();
                     }
                 }
             }
         });
-        btnHuyThemNV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetEdt();
-            }
-        });
+        btnHuyThemNV.setOnClickListener(v -> resetEdt());
 
-    }
-
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     //    Reset Edittext
@@ -182,6 +162,13 @@ public class ThemNhanVienFrgm extends Fragment {
         }
 
         return checkAdd;
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

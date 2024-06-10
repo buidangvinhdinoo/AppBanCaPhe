@@ -134,30 +134,24 @@ public class TKDoanhThuFrgm extends Fragment {
         }
 
 //        Sự kiện Rdo Check
-        rdoTKDTAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    rdoCheck = 0;
-                    boxTenNV.setVisibility(View.GONE);
-                    caseTK = 2;
-                    maUserInput = -1;
-                    tkAllDoanhThu();
-                    goneListTK();
-                }
+        rdoTKDTAll.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                rdoCheck = 0;
+                boxTenNV.setVisibility(View.GONE);
+                caseTK = 2;
+                maUserInput = -1;
+                tkAllDoanhThu();
+                goneListTK();
             }
         });
 
-        rdoTKDTNV.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    rdoCheck = 1;
-                    caseTK = 3;
-                    boxTenNV.setVisibility(View.VISIBLE);
-                    clearListTK();
-                    goneListTK();
-                }
+        rdoTKDTNV.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                rdoCheck = 1;
+                caseTK = 3;
+                boxTenNV.setVisibility(View.VISIBLE);
+                clearListTK();
+                goneListTK();
             }
         });
 
@@ -174,173 +168,147 @@ public class TKDoanhThuFrgm extends Fragment {
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+        ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (getContext(), android.R.layout.select_dialog_item, listTenUser);
 
         edtTKDTTenNV.setThreshold(1);
         edtTKDTTenNV.setAdapter(adapter);
 
 //        Get ngày bắt đầu
-        edtTuNgay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int ngay = calendar.get(calendar.DAY_OF_MONTH);
-                int thang = calendar.get(calendar.MONTH);
-                int nam = calendar.get(calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
-                        String date = "";
-                        calendar.set(mYear, mMonth, mDay);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy 00:00:00");
-                        date = simpleDateFormat.format(calendar.getTime());
-                        String subDate = date.substring(0,10);
-                        edtTuNgay.setText(subDate);
-                        dateStart = date;
-                        ipDateStart = true;
-                    }
-                }, nam, thang, ngay);
-                datePickerDialog.show();
-            }
+        edtTuNgay.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int ngay = calendar.get(Calendar.DAY_OF_MONTH);
+            int thang = calendar.get(Calendar.MONTH);
+            int nam = calendar.get(Calendar.YEAR);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view1, mYear, mMonth, mDay) -> {
+                String date = "";
+                calendar.set(mYear, mMonth, mDay);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy 00:00:00");
+                date = simpleDateFormat.format(calendar.getTime());
+                String subDate = date.substring(0,10);
+                edtTuNgay.setText(subDate);
+                dateStart = date;
+                ipDateStart = true;
+            }, nam, thang, ngay);
+            datePickerDialog.show();
         });
 
 //        Get ngày kết thúc
-        edtDenNgay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int ngay = calendar.get(calendar.DAY_OF_MONTH);
-                int thang = calendar.get(calendar.MONTH);
-                int nam = calendar.get(calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
-                        calendar.set(mYear, mMonth, mDay);
-                        String date = "";
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy 23:59:59");
-                        date = simpleDateFormat.format(calendar.getTime());
-                        String subDate = date.substring(0,10);
-                        edtDenNgay.setText(subDate);
-                        dateEnd = date;
-                        ipDateEnd = true;
-                    }
-                }, nam, thang, ngay);
-                datePickerDialog.show();
-            }
+        edtDenNgay.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int ngay = calendar.get(Calendar.DAY_OF_MONTH);
+            int thang = calendar.get(Calendar.MONTH);
+            int nam = calendar.get(Calendar.YEAR);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view12, mYear, mMonth, mDay) -> {
+                calendar.set(mYear, mMonth, mDay);
+                String date = "";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy 23:59:59");
+                date = simpleDateFormat.format(calendar.getTime());
+                String subDate = date.substring(0,10);
+                edtDenNgay.setText(subDate);
+                dateEnd = date;
+                ipDateEnd = true;
+            }, nam, thang, ngay);
+            datePickerDialog.show();
         });
 
 //        Sự kiện Click button Thống kê
-        btnThongKe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isNameValid = false;
-                boolean checkDoanhThu = true;
+        btnThongKe.setOnClickListener(v -> {
+            isNameValid = false;
+            boolean checkDoanhThu = true;
 //                Check Tên nhân viên trống nếu CaseTK = 3;
-                if (caseTK == 3){
+            if (caseTK == 3){
 //                    Lấy tên nhân viên từ Edittext
-                    tenNVInput = edtTKDTTenNV.getText().toString();
-                    if (tenNVInput.isEmpty()){
-                        checkDoanhThu = false;
-                        edtTKDTTenNV.setHintTextColor(Color.RED);
-                        edtTKDTTenNV.setError("Vui lòng nhập!");
-                    } else {
+                tenNVInput = edtTKDTTenNV.getText().toString();
+                if (tenNVInput.isEmpty()){
+                    checkDoanhThu = false;
+                    edtTKDTTenNV.setHintTextColor(Color.RED);
+                    edtTKDTTenNV.setError("Vui lòng nhập!");
+                } else {
 //                    Check tên nhân viên không tồn tại
-                        ArrayList<User> listNv = daoUser.getAllUser();
-                        for (int i = 0; i < listNv.size(); i++) {
-                            if (listNv.get(i).getFullName().equals(tenNVInput)){
-                                isNameValid = true;
-                            }
-                        }
-                        Log.d(TAG, "isNameValid: " + isNameValid);
-                        if (!isNameValid){
-                            edtTKDTTenNV.setError("Tên nhân viên không tồn tại!");
-                            edtTKDTTenNV.setText(null);
-                            Log.d(TAG, "Running!");
-                            checkDoanhThu = false;
-                            Log.d(TAG, "checkDoanhThu: " + checkDoanhThu);
+                    ArrayList<User> listNv = daoUser.getAllUser();
+                    for (int i = 0; i < listNv.size(); i++) {
+                        if (listNv.get(i).getFullName().equals(tenNVInput)){
+                            isNameValid = true;
                         }
                     }
+                    Log.d(TAG, "isNameValid: " + isNameValid);
+                    if (!isNameValid){
+                        edtTKDTTenNV.setError("Tên nhân viên không tồn tại!");
+                        edtTKDTTenNV.setText(null);
+                        Log.d(TAG, "Running!");
+                        checkDoanhThu = false;
+                        Log.d(TAG, "checkDoanhThu: " + checkDoanhThu);
+                    }
                 }
+            }
 //                Check trống ngày bắt đầu & ngày kết thúc
-                if (!ipDateStart){
-                    checkDoanhThu = false;
-                    edtTuNgay.setHintTextColor(Color.RED);
-                    edtTuNgay.setError("Vui lòng nhập!");
+            if (!ipDateStart){
+                checkDoanhThu = false;
+                edtTuNgay.setHintTextColor(Color.RED);
+                edtTuNgay.setError("Vui lòng nhập!");
+            }
+            if (!ipDateEnd){
+                checkDoanhThu = false;
+                edtDenNgay.setHintTextColor(Color.RED);
+                edtDenNgay.setError("Vui lòng nhập!");
+            }
+            if (checkDoanhThu){
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date dDateS = null;
+                try {
+                    dDateS = simpleDateFormat.parse(dateStart);
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                if (!ipDateEnd){
-                    checkDoanhThu = false;
-                    edtDenNgay.setHintTextColor(Color.RED);
-                    edtDenNgay.setError("Vui lòng nhập!");
+                Date dDateE = null;
+                try {
+                    dDateE = simpleDateFormat.parse(dateEnd);
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                if (checkDoanhThu){
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    Date dDateS = null;
-                    try {
-                        dDateS = simpleDateFormat.parse(dateStart);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    Date dDateE = null;
-                    try {
-                        dDateE = simpleDateFormat.parse(dateEnd);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
 //                    Check ngày bắt đầu <= ngày kết thúc
-                    if (dDateS.before(dDateE)){
+                if (dDateS.before(dDateE)){
 //                        Gán giá trị mã nhân viên
-                        if (caseTK == 3){
-                            int index = 0;
-                            for (int i = 0; i < listUserSize; i++) {
-                                String mTenUser = listTenUser.get(i);
-                                if (mTenUser.equals(tenNVInput)){
-                                    index = i;
-                                }
+                    if (caseTK == 3){
+                        int index = 0;
+                        for (int i = 0; i < listUserSize; i++) {
+                            String mTenUser = listTenUser.get(i);
+                            if (mTenUser.equals(tenNVInput)){
+                                index = i;
                             }
-                            maUserInput = listMaUser.get(index);
                         }
+                        maUserInput = listMaUser.get(index);
+                    }
 
 //                        Gọi thống kê tổng doanh thu
-                        double doanhThu = daoLuuHD.getTongDoanhThu(dateStart, dateEnd, caseTK, maUserInput);
-                        String fDoanhThu = String.format("%,.0f VNĐ", doanhThu);
-                        txtTongDoanhThu.setText(fDoanhThu);
+                    double doanhThu = daoLuuHD.getTongDoanhThu(dateStart, dateEnd, caseTK, maUserInput);
+                    String fDoanhThu = String.format("%,.0f VNĐ", doanhThu);
+                    txtTongDoanhThu.setText(fDoanhThu);
 //                        Get ArrayList
-                        listHD = daoLuuHD.getDSHoaDon(dateStart, dateEnd, caseTK, maUserInput);
-                        goneListTK();
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-                        recycler_TKDT.setLayoutManager(layoutManager);
-                        AdapterTKDT adapterTKDT = new AdapterTKDT(getContext(), listHD);
-                        recycler_TKDT.setAdapter(adapterTKDT);
-                    }
-                    else {
-
-                        clearListTK();
-                        goneListTK();
-                        Toast.makeText(getContext(), "Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc", Toast.LENGTH_SHORT).show();
-
-                    }
+                    listHD = daoLuuHD.getDSHoaDon(dateStart, dateEnd, caseTK, maUserInput);
+                    goneListTK();
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    recycler_TKDT.setLayoutManager(layoutManager);
+                    AdapterTKDT adapterTKDT = new AdapterTKDT(getContext(), listHD);
+                    recycler_TKDT.setAdapter(adapterTKDT);
                 }
                 else {
-                    layoutListDT.setVisibility(View.GONE);
+
+                    clearListTK();
+                    goneListTK();
+                    Toast.makeText(getContext(), "Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc", Toast.LENGTH_SHORT).show();
+
                 }
+            }
+            else {
+                layoutListDT.setVisibility(View.GONE);
             }
         });
 
 //        Back
-        btnBackTKDT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new Account_Fragment());
-            }
-        });
+        btnBackTKDT.setOnClickListener(v -> loadFragment(new Account_Fragment()));
         return view;
-    };
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     public void tkAllDoanhThu(){
@@ -355,7 +323,7 @@ public class TKDoanhThuFrgm extends Fragment {
     }
 
     public void clearListTK(){
-        if (listHD.size() != 0){
+        if (!listHD.isEmpty()){
             listHD.clear();
         }
         txtTongDoanhThu.setText("0 VNĐ");
@@ -365,12 +333,15 @@ public class TKDoanhThuFrgm extends Fragment {
     }
 
     public void goneListTK(){
-        if (listHD.size() == 0){
-            layoutListDT.setVisibility(View.GONE);
-        }
-        else {
-            layoutListDT.setVisibility(View.VISIBLE);
-        }
+        if (listHD.isEmpty()) layoutListDT.setVisibility(View.GONE);
+        else layoutListDT.setVisibility(View.VISIBLE);
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

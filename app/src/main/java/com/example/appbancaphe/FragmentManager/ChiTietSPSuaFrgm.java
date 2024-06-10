@@ -30,7 +30,6 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
     DAOSanPham dao;
     double tongTien = 0;
 
-
     public ChiTietSPSuaFrgm(SanPham sanPham) {
         this.sanPham = sanPham;
     }
@@ -70,46 +69,32 @@ public class ChiTietSPSuaFrgm extends Fragment implements View.OnClickListener {
         txtCTSPSuaGiaSP.setText(outGia + " VNĐ");
         // sự kiện onclick
         // sửa sản phẩm
-        btnCTSPSuaSua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new SuaSPFrgm(sanPham));
-            }
-        });
+        btnCTSPSuaSua.setOnClickListener(v -> loadFragment(new SuaSPFrgm(sanPham)));
         // xoá sửa sản phẩm
-        btnCTSPSuaXoa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_confirm);
-                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnCTSPSuaXoa.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.dialog_confirm);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
-                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
-                EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
+            TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+            EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+            EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
 
-                dialog_confirm_content.setText("Bạn chắc chắn muốn xóa sản phẩm đã chọn!");
+            dialog_confirm_content.setText("Bạn chắc chắn muốn xóa sản phẩm đã chọn!");
 
-                btnDialogHuy.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "Hủy", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
+            btnDialogHuy.setOnClickListener(v1 -> {
+                Toast.makeText(getContext(), "Hủy", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            });
 
-                btnDialogXN.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dao.deleteData(sanPham.getId());
-                        Toast.makeText(getContext(), "Đã xóa Sản phẩm", Toast.LENGTH_SHORT).show();
-                        loadFragment(new ProductFrgm());
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
+            btnDialogXN.setOnClickListener(v2 -> {
+                dao.deleteData(sanPham.getId());
+                Toast.makeText(getContext(), "Đã xóa Sản phẩm", Toast.LENGTH_SHORT).show();
+                loadFragment(new ProductFrgm());
+                dialog.dismiss();
+            });
+            dialog.show();
         });
 
         return view;

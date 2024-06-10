@@ -15,7 +15,7 @@ public class DAOHoaDon {
     private SQLiteDatabase database;
     DbHelper dbHelper;
 
-    //    Khởi tạo Constructor
+//    Khởi tạo Constructor
     public DAOHoaDon(Context context){
         dbHelper = new DbHelper(context, "DuAn1", null, 2);
         database = dbHelper.getWritableDatabase();

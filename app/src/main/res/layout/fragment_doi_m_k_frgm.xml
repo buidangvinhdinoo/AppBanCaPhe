@@ -28,9 +28,7 @@
             android:text="Đổi Mật Khẩu"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="30dp"
-
-            />
+            android:textSize="30dp" />
 
     </LinearLayout>
 
@@ -78,6 +76,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="35dp"
                     android:src="@drawable/ic_visibility_off" />
+
             </RelativeLayout>
 
         </LinearLayout>
@@ -118,6 +117,7 @@
                     android:layout_marginRight="35dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_visibility_off" />
+
             </RelativeLayout>
 
         </LinearLayout>
@@ -160,11 +160,10 @@
                     android:layout_marginRight="35dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_visibility_off" />
+
             </RelativeLayout>
 
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -211,10 +210,9 @@
                 android:textColor="@color/white"
                 android:textSize="25dp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </LinearLayout>

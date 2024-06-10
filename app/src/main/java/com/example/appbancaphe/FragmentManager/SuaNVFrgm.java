@@ -80,99 +80,84 @@ public class SuaNVFrgm extends Fragment {
         edtSuaNamSinh.setText(user.getNamSinh() + "");
         
 //        Set Click Xác Nhận
-        btnAddSuaNV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnAddSuaNV.setOnClickListener(v -> {
 //                Gettext
-                tenSua = edtSuaTenNV.getText().toString();
-                passSua = edtSuaMatKhau.getText().toString();
-                sdtSua = edtSuaSDT.getText().toString();
-                namSinhSua = edtSuaNamSinh.getText().toString();
-                int mNamSinhSua = Integer.parseInt(namSinhSua);
+            tenSua = edtSuaTenNV.getText().toString();
+            passSua = edtSuaMatKhau.getText().toString();
+            sdtSua = edtSuaSDT.getText().toString();
+            namSinhSua = edtSuaNamSinh.getText().toString();
+            int mNamSinhSua = Integer.parseInt(namSinhSua);
 //                Kiểm tra check Form
-                if (checkForm()){
+            if (checkForm()){
 //                    Dialog xác nhận sửa thông tin Account
-                    Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_confirm);
-                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_confirm);
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                    TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
-                    EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
-                    EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
+                TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
 
 //                    Settext nội dung tin nhắn đối với Admin và User
-                    if (quyenUser == user.getMaChucVu()){
-                        dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin cá nhân!");
-                    }
-                    else {
-                        dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin nhân viên!");
-                    }
+                if (quyenUser == user.getMaChucVu()){
+                    dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin cá nhân!");
+                }
+                else {
+                    dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin nhân viên!");
+                }
 
 //                    Set Click Dialog Hủy
-                    btnDialogHuy.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
+                btnDialogHuy.setOnClickListener(v1 -> {
+                    Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
 
 //                    Set Click Dialog Xác Nhận
-                    btnDialogXN.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                btnDialogXN.setOnClickListener(v12 -> {
 //                            Settext Model
-                            user.setFullName(tenSua);
-                            if (!passSua.isEmpty()){
-                                user.setPassword(passSua);
-                            }
-                            user.setSDT(sdtSua);
-                            user.setNamSinh(mNamSinhSua);
+                    user.setFullName(tenSua);
+                    if (!passSua.isEmpty()){
+                        user.setPassword(passSua);
+                    }
+                    user.setSDT(sdtSua);
+                    user.setNamSinh(mNamSinhSua);
 //                            DAO Update thông tin User
-                            boolean check = daoUser.updateUser(user);
-                            if (check){
-                                Toast.makeText(getContext(), "Cập nhật thông tin thành công!", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
+                    boolean check = daoUser.updateUser(user);
+                    if (check){
+                        Toast.makeText(getContext(), "Cập nhật thông tin thành công!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
 //                                Ẩn Dialog, trở về màn hình trước
-                                if (quyenUser == user.getMaChucVu()){
-                                    loadFragment(new UserInfoFrgm());
-                                }
-                                else {
-                                    loadFragment(new TKNhanVienFrgm());
-                                }
-                            }
-                            else {
-                                Toast.makeText(getContext(), "Fail!", Toast.LENGTH_SHORT).show();
-                            }
+                        if (quyenUser == user.getMaChucVu()){
+                            loadFragment(new UserInfoFrgm());
                         }
-                    });
-                    dialog.show();
-                }
+                        else {
+                            loadFragment(new TKNhanVienFrgm());
+                        }
+                    }
+                    else {
+                        Toast.makeText(getContext(), "Fail!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.show();
             }
         });
 
 //        Set Click Hủy
-        btnHuySuaNV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edtSuaTenNV.setText(user.getFullName());
-                edtSuaMatKhau.setText(null);
-                edtSuaSDT.setText(user.getSDT());
-                edtSuaNamSinh.setText(String.valueOf(user.getNamSinh()));
-            }
+        btnHuySuaNV.setOnClickListener(v -> {
+            edtSuaTenNV.setText(user.getFullName());
+            edtSuaMatKhau.setText(null);
+            edtSuaSDT.setText(user.getSDT());
+            edtSuaNamSinh.setText(String.valueOf(user.getNamSinh()));
         });
 
 //        Set Click Back
-        btnBackSuaNV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(quyenUser == user.getMaChucVu()){
-                    loadFragment(new UserInfoFrgm());
-                }
-                else {
-                    loadFragment(new ViewUserInforFrgm(user));
-                }
+        btnBackSuaNV.setOnClickListener(v -> {
+            if(quyenUser == user.getMaChucVu()){
+                loadFragment(new UserInfoFrgm());
+            }
+            else {
+                loadFragment(new ViewUserInforFrgm(user));
             }
         });
 
@@ -226,4 +211,5 @@ public class SuaNVFrgm extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 }

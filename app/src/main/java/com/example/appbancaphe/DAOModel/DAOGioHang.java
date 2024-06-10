@@ -11,7 +11,6 @@ import com.example.appbancaphe.Model.GioHang;
 import java.util.ArrayList;
 
 public class DAOGioHang {
-
     private SQLiteDatabase database;
     DbHelper dbHelper;
 

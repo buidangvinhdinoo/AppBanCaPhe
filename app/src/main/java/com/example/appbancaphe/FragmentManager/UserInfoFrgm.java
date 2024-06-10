@@ -50,26 +50,16 @@ public class UserInfoFrgm extends Fragment {
         txtInfoNamSinh.setText(String.valueOf(user.getNamSinh()));
 
 //        Set Onclick Button Back
-        btnBackUserInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new Account_Fragment());
-            }
-        });
+        btnBackUserInfo.setOnClickListener(v -> loadFragment(new Account_Fragment()));
 
 //        Set Onclick Button Edit
-        btnInfoEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new SuaNVFrgm(user));
-            }
-        });
+        btnInfoEdit.setOnClickListener(v -> loadFragment(new SuaNVFrgm(user)));
 
         return view;
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

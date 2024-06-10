@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="#E0EAF3"
-    >
+    android:background="#E0EAF3">
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-
         android:src="@drawable/img_logo" />
 
     <TextView
@@ -72,9 +69,7 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/userFrgmDoiMK"
@@ -102,10 +97,9 @@
                     android:paddingBottom="3dp"
                     android:text="Đổi Mật Khẩu"
                     android:textColor="@color/black"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -139,7 +133,6 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -172,7 +165,6 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -204,7 +196,6 @@
                     android:textSize="20dp"/>
 
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -239,7 +230,6 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -272,7 +262,6 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -298,7 +287,6 @@
                 android:textSize="20dp"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

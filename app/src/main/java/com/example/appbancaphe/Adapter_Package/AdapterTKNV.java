@@ -78,12 +78,9 @@ public class AdapterTKNV extends RecyclerView.Adapter<AdapterTKNV.ViewHolder>{
         User user = daoUser.getUser(luuHoaDon.getMaUser());
 
 //        Item Click
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.itemView.setOnClickListener(v -> {
 //                Load Fragment hiển thị thông tin nhân viên
-                loadFragment(new ViewUserInforFrgm(user));
-            }
+            loadFragment(new ViewUserInforFrgm(user));
         });
     }
 
@@ -93,9 +90,7 @@ public class AdapterTKNV extends RecyclerView.Adapter<AdapterTKNV.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView txtTknvSTT, txtTknvTenNv, txtTknvDoanhThu;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

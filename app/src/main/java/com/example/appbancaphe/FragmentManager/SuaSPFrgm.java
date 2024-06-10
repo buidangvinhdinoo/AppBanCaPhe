@@ -82,32 +82,24 @@ public class SuaSPFrgm extends Fragment {
 
 
         // set sự kiện
-        btnBackSuaSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new ChiTietSPSuaFrgm(sanPham));
-            }
-        });
+        btnBackSuaSP.setOnClickListener(v -> loadFragment(new ChiTietSPSuaFrgm(sanPham)));
 
-        btnSuaSPHuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edUpdateAnhSP.setText(sanPham.getImage());
-                edUpdateGiaBan.setText(sanPham.getPrice() + "");
-                edUpdateTenSP.setText(sanPham.getTenSanPham());
-                maLoai = sanPham.getMaLoai();
-                String tenLoai = "";
-                ArrayList<TheLoai> listTL = daoSanPham.getDSLSP();
-                for (int i = 0; i < listTL.size(); i++) {
-                    if (listTL.get(i).getMaLoai() == maLoai){
-                        tenLoai = listTL.get(i).getTenLoai();
-                    }
+        btnSuaSPHuy.setOnClickListener(v -> {
+            edUpdateAnhSP.setText(sanPham.getImage());
+            edUpdateGiaBan.setText(sanPham.getPrice() + "");
+            edUpdateTenSP.setText(sanPham.getTenSanPham());
+            maLoai = sanPham.getMaLoai();
+            String tenLoai1 = "";
+            ArrayList<TheLoai> listTL1 = daoSanPham.getDSLSP();
+            for (int i = 0; i < listTL1.size(); i++) {
+                if (listTL1.get(i).getMaLoai() == maLoai){
+                    tenLoai1 = listTL1.get(i).getTenLoai();
                 }
-                edtLoaiSP.setText(tenLoai);
-                edUpdateMoTa.setText(sanPham.getMota());
-
-                Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
             }
+            edtLoaiSP.setText(tenLoai1);
+            edUpdateMoTa.setText(sanPham.getMota());
+
+            Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
         });
 //        Set Data cho spnLoaiSP - AnhNQ
         ArrayList<TheLoai> listTheLoai = daoSanPham.getDSLSP();
@@ -128,86 +120,67 @@ public class SuaSPFrgm extends Fragment {
         edtLoaiSP.setThreshold(1);
         edtLoaiSP.setAdapter(adapter);
 
-        btnSuaSPXN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                strAnhSP = edUpdateAnhSP.getText().toString();
+        btnSuaSPXN.setOnClickListener(v -> {
+            strAnhSP = edUpdateAnhSP.getText().toString();
 
-                strTenSP = edUpdateTenSP.getText().toString();
-                strGiaban = Double.parseDouble(edUpdateGiaBan.getText().toString());
-                strMota = edUpdateMoTa.getText().toString();
-                strLoaiSP = edtLoaiSP.getText().toString();
+            strTenSP = edUpdateTenSP.getText().toString();
+            strGiaban = Double.parseDouble(edUpdateGiaBan.getText().toString());
+            strMota = edUpdateMoTa.getText().toString();
+            strLoaiSP = edtLoaiSP.getText().toString();
 
-                checkTL = false;
-                index = 0;
-                for (int i = 0; i < listTheLoaiSize; i++) {
-                    String mTenLoai = listTenTL.get(i);
-                    if (mTenLoai.equals(strLoaiSP)){
-                        index = i;
-                        checkTL = true;
-                        break;
+            checkTL = false;
+            index = 0;
+            for (int i = 0; i < listTheLoaiSize; i++) {
+                String mTenLoai = listTenTL.get(i);
+                if (mTenLoai.equals(strLoaiSP)){
+                    index = i;
+                    checkTL = true;
+                    break;
+                }
+            }
+
+            if (checkTL){
+                Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_confirm);
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                EditText btnUpdate = dialog.findViewById(R.id.btnDialogXN);
+
+                dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin sản phẩm đã chọn!");
+
+                btnDialogHuy.setOnClickListener(v1 -> {
+                    Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
+
+                //Update
+                btnUpdate.setOnClickListener(v12 -> {
+                    if (checkEdt()) {
+                    maLoai = listMaTL.get(index);
+                        daoSanPham.updateSanPham(strAnhSP, strTenSP, strGiaban, maLoai, strMota, sanPham.getId());
+                        Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        loadFragment(new ProductFrgm());
+                        resetEdt();
+                        dialog.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
-                }
-
-                if (checkTL){
-                    Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_confirm);
-                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                    TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
-                    EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
-                    EditText btnUpdate = dialog.findViewById(R.id.btnDialogXN);
-
-                    dialog_confirm_content.setText("Bạn chắc chắn muốn sửa thông tin sản phẩm đã chọn!");
-
-                    btnDialogHuy.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getContext(), "Hủy!", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
-
-                    //Update
-                    btnUpdate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (checkEdt()) {
-                            maLoai = listMaTL.get(index);
-                                daoSanPham.updateSanPham(strAnhSP, strTenSP, strGiaban, maLoai, strMota, sanPham.getId());
-                                Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                                loadFragment(new ProductFrgm());
-                                resetEdt();
-                                dialog.dismiss();
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                    });
-                    dialog.show();
-                }   else {
-                    edtLoaiSP.setError("Loại sản phẩm không tồn tại!");
-                    edtLoaiSP.setText("");
-                }
+                });
+                dialog.show();
+            }   else {
+                edtLoaiSP.setError("Loại sản phẩm không tồn tại!");
+                edtLoaiSP.setText("");
             }
         });
         return view;
     }
 
     //Cấp quyền lấy ảnh
-
     Bitmap imgChose = null;
 
-
     //image to byte
-
-    //replaceFragment
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 
     //    Check Form
     private boolean checkEdt() {
@@ -255,4 +228,13 @@ public class SuaSPFrgm extends Fragment {
         edUpdateMoTa.setText("");
         edUpdateMoTa.setHintTextColor(Color.BLACK);
     }
+
+    //replaceFragment
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }

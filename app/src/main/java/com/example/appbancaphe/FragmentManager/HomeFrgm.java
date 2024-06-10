@@ -35,7 +35,7 @@ public class HomeFrgm extends Fragment {
     private ArrayList<SanPham> listSpTopOut = new ArrayList<>();
     DAOLuuHD daoLuuHD;
     DAOSanPham daoSanPham;
-    LinearLayout layoutParent;
+    //LinearLayout layoutParent;
     DAOUser daoUser;
 
     @Override
@@ -43,7 +43,7 @@ public class HomeFrgm extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_frgm, container, false);
         ImageView imgNotifi = view.findViewById(R.id.imgNotifi);
-        layoutParent = view.findViewById(R.id.layoutParent);
+        //layoutParent = view.findViewById(R.id.layoutParent);
         recycler_SPBanChay = view.findViewById(R.id.recycler_SPBanChay);
         TextView txtHello = view.findViewById(R.id.txtHello);
         daoLuuHD = new DAOLuuHD(getContext());
@@ -67,31 +67,22 @@ public class HomeFrgm extends Fragment {
             }
         }
 
-
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         adapterHome = new AdapterHome(listSpTopOut ,getActivity());
         recycler_SPBanChay.setLayoutManager(layoutManager);
         recycler_SPBanChay.setAdapter(adapterHome);
 
 //        Notifi
-        imgNotifi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_notifi);
-                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        imgNotifi.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.dialog_notifi);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                EditText btnDongNotifi = dialog.findViewById(R.id.btnDongNotifi);
-                btnDongNotifi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
+            EditText btnDongNotifi = dialog.findViewById(R.id.btnDongNotifi);
+            btnDongNotifi.setOnClickListener(v1 -> dialog.dismiss());
+            dialog.show();
 
-            }
         });
 
         return view;

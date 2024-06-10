@@ -29,8 +29,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class ThemSPFrgm extends Fragment {
-
-
     private EditText  edAnh,edName, edPrice, edMoTa, btnAddSP, btnHuySP;
     AutoCompleteTextView edtLoaiSP;
     private DAOSanPham daoSanPham;
@@ -53,12 +51,7 @@ public class ThemSPFrgm extends Fragment {
         btnAddSP = view.findViewById(R.id.btnAcceptSP);
         btnHuySP = view.findViewById(R.id.btnHuySp);
 
-        btnBackThemSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new Account_Fragment());
-            }
-        });
+        btnBackThemSP.setOnClickListener(v -> loadFragment(new Account_Fragment()));
 
 //        Set Data cho spnLoaiSP - AnhNQ
         ArrayList<TheLoai> listTheLoai = daoSanPham.getDSLSP();
@@ -73,7 +66,7 @@ public class ThemSPFrgm extends Fragment {
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+        ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (getContext(), android.R.layout.select_dialog_item, listTenTL);
 
         edtLoaiSP.setThreshold(1);
@@ -81,53 +74,45 @@ public class ThemSPFrgm extends Fragment {
 
 
 //        Set sự kiện Click Button Thêm
-        btnAddSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                strAnhSp = edAnh.getText().toString();
-                strTenSP = edName.getText().toString();
-                strGiaban = edPrice.getText().toString();
-                strMota = edMoTa.getText().toString();
-                strLoaiSP = edtLoaiSP.getText().toString();
-                boolean checkTL = false;
+        btnAddSP.setOnClickListener(v -> {
+            strAnhSp = edAnh.getText().toString();
+            strTenSP = edName.getText().toString();
+            strGiaban = edPrice.getText().toString();
+            strMota = edMoTa.getText().toString();
+            strLoaiSP = edtLoaiSP.getText().toString();
+            boolean checkTL = false;
 
 //                AutoComplete Text, Kiểm tra tồn tại loại sản phẩm.
-                int index = 0;
-                for (int i = 0; i < listTheLoaiSize; i++) {
-                    String mTenLoai = listTenTL.get(i);
-                    if (mTenLoai.equals(strLoaiSP)){
-                        index = i;
-                        checkTL = true;
-                        break;
-                    }
+            int index = 0;
+            for (int i = 0; i < listTheLoaiSize; i++) {
+                String mTenLoai = listTenTL.get(i);
+                if (mTenLoai.equals(strLoaiSP)){
+                    index = i;
+                    checkTL = true;
+                    break;
                 }
+            }
 
-                int maLSP = 0;
+            int maLSP = 0;
+            if (checkTL){
+                maLSP = listMaTL.get(index);
+            }
+
+            if (checkEdt()) {
                 if (checkTL){
-                    maLSP = listMaTL.get(index);
+                    daoSanPham.insertData(strAnhSp, strTenSP, Double.parseDouble(strGiaban), maLSP, strMota);
+                    Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    resetEdt();
                 }
-
-                if (checkEdt()) {
-                    if (checkTL){
-                        daoSanPham.insertData(strAnhSp, strTenSP, Double.parseDouble(strGiaban), maLSP, strMota);
-                        Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                        resetEdt();
-                    }
-                    else {
-                        edtLoaiSP.setError("Loại sản phẩm không tồn tại!");
-                        edtLoaiSP.setText("");
-                    }
+                else {
+                    edtLoaiSP.setError("Loại sản phẩm không tồn tại!");
+                    edtLoaiSP.setText("");
                 }
             }
         });
 
 //        Set sự kiện Click Button Hủy
-        btnHuySP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resetEdt();
-            }
-        });
+        btnHuySP.setOnClickListener(view1 -> resetEdt());
         return view;
     }
 
@@ -149,16 +134,6 @@ public class ThemSPFrgm extends Fragment {
             intent.setType("image/*");
             startActivityForResult(intent, REQUEST_CODE_GALLERY);
         }
-    }
-
-
-
-
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     //    Reset Edittext
@@ -204,6 +179,13 @@ public class ThemSPFrgm extends Fragment {
         }
 
         return checkAdd;
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

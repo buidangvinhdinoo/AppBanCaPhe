@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
         android:padding="10dp">
 
         <LinearLayout
@@ -19,8 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/ct_edittext"
-            >
+            android:background="@drawable/ct_edittext">
 
             <TextView
                 android:id="@+id/txtHello"
@@ -30,14 +28,12 @@
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/black"
                 android:text="Ngày mới tốt lành, Username"
-                android:fontFamily="@font/ct_font_medium"
-                />
+                android:fontFamily="@font/ct_font_medium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                >
+                android:gravity="end">
 
                 <ImageView
                     android:id="@+id/imgNotifi"
@@ -47,14 +43,14 @@
                     android:background="@drawable/ic_notifications" />
 
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 style="@style/edt_Label"
@@ -62,28 +58,25 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
-                />
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:orientation="horizontal"
                 android:weightSum="1"
-                android:background="@drawable/nen"
-                >
+                android:background="@drawable/nen">
 
                 <ViewFlipper
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-
                     android:flipInterval="2000"
                     android:autoStart="true"
                     android:inAnimation="@android:anim/slide_in_left"
-                    android:outAnimation="@android:anim/slide_out_right"
-                    >
+                    android:outAnimation="@android:anim/slide_out_right">
+
                     <ImageView
                         android:id="@+id/imageView"
                         android:layout_width="wrap_content"
@@ -119,7 +112,6 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/banner4" />
 
-
                 </ViewFlipper>
 
             </LinearLayout>
@@ -145,16 +137,16 @@
                 android:id="@+id/recycler_SPBanChay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutParent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5sp"
-            android:orientation="vertical">
 
         </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/layoutParent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5sp"-->
+<!--            android:orientation="vertical">-->
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 

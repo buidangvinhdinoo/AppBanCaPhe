@@ -61,90 +61,40 @@ public class Account_Fragment extends Fragment {
         txtUserName.setText(user.getFullName());
         txtChucVu.setText(user.getTenChucVu());
 
-        userFrgmTaiKhoan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new UserInfoFrgm());
-            }
-        });
+        userFrgmTaiKhoan.setOnClickListener(v -> loadFragment(new UserInfoFrgm()));
+        userFrgmDoiMK.setOnClickListener(v -> loadFragment(new DoiMKFrgm()));
+        userFrgmTKDoanhThu.setOnClickListener(v -> loadFragment(new TKDoanhThuFrgm()));
+        userFrgmTKNhanVien.setOnClickListener(v -> loadFragment(new TKNhanVienFrgm()));
+        userFrgmThemSP.setOnClickListener(v -> loadFragment(new ThemSPFrgm()));
+        userFrgmThemLSP.setOnClickListener(v -> loadFragment(new ThemLSPFragm()));
+        userFrgmThemNhanVien.setOnClickListener(v -> loadFragment(new ThemNhanVienFrgm()));
 
-        userFrgmDoiMK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new DoiMKFrgm());
-            }
-        });
+        userFrgmDangXuat.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.dialog_confirm);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+            dialog_confirm_content.setText("Bạn muốn đăng xuất?");
+            EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+            EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
 
-        userFrgmTKDoanhThu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new TKDoanhThuFrgm());
-            }
-        });
+            btnDialogXN.setOnClickListener(v1 -> {
+                Intent intent = new Intent(getActivity(), DangNhapAct.class);
+                Toast.makeText(getContext(), "Đăng xuất!", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                dialog.dismiss();
+            });
 
-        userFrgmTKNhanVien.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new TKNhanVienFrgm());
-            }
-        });
+            btnDialogHuy.setOnClickListener(v1 -> dialog.dismiss());
 
-        userFrgmThemSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new ThemSPFrgm());
-            }
-        });
-
-        userFrgmThemLSP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new ThemLSPFragm());
-            }
-        });
-
-        userFrgmThemNhanVien.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new ThemNhanVienFrgm());
-            }
-        });
-
-        userFrgmDangXuat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_confirm);
-                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
-                dialog_confirm_content.setText("Bạn muốn đăng xuất?");
-                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
-                EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
-                btnDialogXN.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), DangNhapAct.class);
-                        Toast.makeText(getContext(), "Đăng xuất!", Toast.LENGTH_SHORT).show();
-
-                        startActivity(intent);
-                        dialog.dismiss();
-                    }
-                });
-                btnDialogHuy.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
+            dialog.show();
         });
         return view;
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

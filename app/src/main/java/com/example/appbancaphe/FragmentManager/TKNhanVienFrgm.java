@@ -45,18 +45,13 @@ public class TKNhanVienFrgm extends Fragment {
 
         txtTKNVSoLg.setText(listNhanVien.size() + " người");
 
-        btnBackTKNV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new Account_Fragment());
-            }
-        });
+        btnBackTKNV.setOnClickListener(v -> loadFragment(new Account_Fragment()));
 
         return view;
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

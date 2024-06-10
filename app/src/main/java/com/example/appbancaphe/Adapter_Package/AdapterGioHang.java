@@ -46,7 +46,6 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
         GioHang gioHang = list.get(position);
 
 //        Set ảnh cho Items
-//
         Picasso.get().load(gioHang.getImgSP()).into(holder.imgGHAnhSP);
         holder.txtGHTenSP.setText(gioHang.getTenSP() + " - " + gioHang.getSize());
         double donGia = gioHang.getDonGia();
@@ -56,52 +55,12 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
         holder.edtGHSoLuong.setText(soLuong + "");
 
 //        Sự kiện giảm số lượng sản phẩm
-        holder.btnHGTru.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int soLuong = gioHang.getSoLuong();
-                if (soLuong > 1){
+        holder.btnHGTru.setOnClickListener(v -> {
+            int soLuong1 = gioHang.getSoLuong();
+            if (soLuong1 > 1){
 //                    Số lượng SP hiện tại > 0 => Giảm
-                    soLuong--;
-                    gioHang.setSoLuong(soLuong);
-                    boolean kiemtra = daoGioHang.updateGioHang(gioHang);
-                    if (kiemtra){
-                        list.clear();
-                        list = daoGioHang.getGioHang();
-                        notifyDataSetChanged();
-                    }
-                    else {
-                        Toast.makeText(context, "Update SL Fail!", Toast.LENGTH_SHORT).show();
-                    }
-                    holder.edtGHSoLuong.setText(soLuong + "");
-                }
-                else {
-//                    Số lượng SP = 0 => Xóa SP khỏi giỏ hàng
-                    boolean kiemtra = daoGioHang.deleteGiohang(gioHang);
-                    if (kiemtra){
-                        Toast.makeText(context, "Đã xóa Sản phẩm khỏi giỏ hàng!", Toast.LENGTH_SHORT).show();
-                        list.clear();
-                        list = daoGioHang.getGioHang();
-                        notifyDataSetChanged();
-                    }
-                    else {
-                        Toast.makeText(context, "Delete Fail!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                notifyDataSetChanged();
-                double tongTien = daoGioHang.tongTienGiohang();
-                String outTongTien = String.format("%,.0f", tongTien);
-                StoreFrgm.txtGHTongTien.setText(outTongTien + " VNĐ");
-            }
-        });
-
-//        Sự kiện tăng số lượng sản phẩm
-        holder.btnGHCong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int soLuong = gioHang.getSoLuong();
-                soLuong++;
-                gioHang.setSoLuong(soLuong);
+                soLuong1--;
+                gioHang.setSoLuong(soLuong1);
                 boolean kiemtra = daoGioHang.updateGioHang(gioHang);
                 if (kiemtra){
                     list.clear();
@@ -111,12 +70,46 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
                 else {
                     Toast.makeText(context, "Update SL Fail!", Toast.LENGTH_SHORT).show();
                 }
-                holder.edtGHSoLuong.setText(soLuong + "");
-                notifyDataSetChanged();
-                double tongTien = daoGioHang.tongTienGiohang();
-                String outTongTien = String.format("%,.0f", tongTien);
-                StoreFrgm.txtGHTongTien.setText(outTongTien + " VNĐ");
+                holder.edtGHSoLuong.setText(soLuong1 + "");
             }
+            else {
+//                    Số lượng SP = 0 => Xóa SP khỏi giỏ hàng
+                boolean kiemtra = daoGioHang.deleteGiohang(gioHang);
+                if (kiemtra){
+                    Toast.makeText(context, "Đã xóa Sản phẩm khỏi giỏ hàng!", Toast.LENGTH_SHORT).show();
+                    list.clear();
+                    list = daoGioHang.getGioHang();
+                    notifyDataSetChanged();
+                }
+                else {
+                    Toast.makeText(context, "Delete Fail!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            notifyDataSetChanged();
+            double tongTien = daoGioHang.tongTienGiohang();
+            String outTongTien = String.format("%,.0f", tongTien);
+            StoreFrgm.txtGHTongTien.setText(outTongTien + " VNĐ");
+        });
+
+//        Sự kiện tăng số lượng sản phẩm
+        holder.btnGHCong.setOnClickListener(v -> {
+            int soLuong12 = gioHang.getSoLuong();
+            soLuong12++;
+            gioHang.setSoLuong(soLuong12);
+            boolean kiemtra = daoGioHang.updateGioHang(gioHang);
+            if (kiemtra){
+                list.clear();
+                list = daoGioHang.getGioHang();
+                notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(context, "Update SL Fail!", Toast.LENGTH_SHORT).show();
+            }
+            holder.edtGHSoLuong.setText(soLuong12 + "");
+            notifyDataSetChanged();
+            double tongTien = daoGioHang.tongTienGiohang();
+            String outTongTien = String.format("%,.0f", tongTien);
+            StoreFrgm.txtGHTongTien.setText(outTongTien + " VNĐ");
         });
         holder.edtGHSoLuong.getText().toString();
     }

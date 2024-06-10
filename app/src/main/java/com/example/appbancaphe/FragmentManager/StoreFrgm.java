@@ -64,179 +64,159 @@ public class StoreFrgm extends Fragment {
         txtGHTongTien = view.findViewById(R.id.txtGHTongTien);
         iconRefreshStore = view.findViewById(R.id.iconRefreshStore);
         createData();
-        iconRefreshStore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listGioHang = daoGioHang.getGioHang();
-                int listGHSize = listGioHang.size();
-                if (listGHSize != 0){
-                    Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_confirm);
-                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        iconRefreshStore.setOnClickListener(v -> {
+            listGioHang = daoGioHang.getGioHang();
+            int listGHSize = listGioHang.size();
+            if (listGHSize != 0){
+                Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_confirm);
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                    TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
-                    EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
-                    EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
+                TextView dialog_confirm_content = dialog.findViewById(R.id.dialog_confirm_content);
+                EditText btnDialogHuy = dialog.findViewById(R.id.btnDialogHuy);
+                EditText btnDialogXN = dialog.findViewById(R.id.btnDialogXN);
 
-                    dialog_confirm_content.setText("Bạn chắc chắn muốn xóa sản phẩm trong giỏ hàng!");
+                dialog_confirm_content.setText("Bạn chắc chắn muốn xóa sản phẩm trong giỏ hàng!");
 
 //                Set Click Button Dialog Hủy
-                    btnDialogHuy.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getContext(), "Hủy", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
+                btnDialogHuy.setOnClickListener(v1 -> {
+                    Toast.makeText(getContext(), "Hủy", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
 
-                    btnDialogXN.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            for (int i = 0; i < listGHSize; i++) {
-                                daoGioHang.deleteGiohang(listGioHang.get(i));
-                            }
-                            createData();
-                            txtGHTongTien.setText("0 VNĐ");
-                            Toast.makeText(getContext(), "Đã xóa giỏ hàng!", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
-                    dialog.show();
-                    
-                    
-                }
+                btnDialogXN.setOnClickListener(v12 -> {
+                    for (int i = 0; i < listGHSize; i++) {
+                        daoGioHang.deleteGiohang(listGioHang.get(i));
+                    }
+                    createData();
+                    txtGHTongTien.setText("0 VNĐ");
+                    Toast.makeText(getContext(), "Đã xóa giỏ hàng!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
+                dialog.show();
+
+
             }
         });
 
 
         EditText btnGioHangTT = view.findViewById(R.id.btnGioHangTT);
-        btnGioHangTT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tenKH = edtGHTenKH.getText().toString();
-                createData();
-                if (listGioHang.size() == 0){
-                    Toast.makeText(getContext(), "Vui lòng chọn sản phẩm!", Toast.LENGTH_SHORT).show();
+        btnGioHangTT.setOnClickListener(v -> {
+            String tenKH = edtGHTenKH.getText().toString();
+            createData();
+            if (listGioHang.size() == 0){
+                Toast.makeText(getContext(), "Vui lòng chọn sản phẩm!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                //                Kiểm tra nhập tên khách hàng
+                if (tenKH.isEmpty()){
+                    edtGHTenKH.setHintTextColor(Color.RED);
+                    edtGHTenKH.setError("Vui lòng nhập!");
                 }
                 else {
-                    //                Kiểm tra nhập tên khách hàng
-                    if (tenKH.isEmpty()){
-                        edtGHTenKH.setHintTextColor(Color.RED);
-                        edtGHTenKH.setError("Vui lòng nhập!");
-                    }
-                    else {
-                        edtGHTenKH.setHintTextColor(Color.BLACK);
+                    edtGHTenKH.setHintTextColor(Color.BLACK);
 
 //                    Lấy tên nhân viên
-                        SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", getActivity().MODE_PRIVATE);
-                        int maUser = pref.getInt("MA", 0);
-                        User user = daoUser.getUser(maUser);
-                        String fullName = user.getFullName();
+                    SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", getActivity().MODE_PRIVATE);
+                    int maUser = pref.getInt("MA", 0);
+                    User user = daoUser.getUser(maUser);
+                    String fullName = user.getFullName();
 
 //                    Lấy ngày tạo hóa đơn
-                        Date nowDate = Calendar.getInstance().getTime();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
-                        String ngayTaoHD = simpleDateFormat.format(nowDate);
+                    Date nowDate = Calendar.getInstance().getTime();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+                    String ngayTaoHD = simpleDateFormat.format(nowDate);
 
 //                Lấy thông tin hóa đơn - Hiển thị lên dialog
-                        Dialog dialog = new Dialog(getActivity());
-                        dialog.setContentView(R.layout.dialog_thanh_toan);
-                        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_thanh_toan);
+                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 //                    Ánh xạ View
 
-                        EditText btnHoaDonHuy = dialog.findViewById(R.id.btnHoaDonHuy);
-                        EditText btnHoaDonXN = dialog.findViewById(R.id.btnHoaDonXN);
+                    EditText btnHoaDonHuy = dialog.findViewById(R.id.btnHoaDonHuy);
+                    EditText btnHoaDonXN = dialog.findViewById(R.id.btnHoaDonXN);
 
-                        TextView txtHDTenNV = dialog.findViewById(R.id.txtHDTenNV);
-                        TextView txtHDTenKH = dialog.findViewById(R.id.txtHDTenKH);
-                        TextView txtHDNgayBan = dialog.findViewById(R.id.txtHDNgayBan);
-                        RecyclerView recycle_hoaDon = dialog.findViewById(R.id.recycle_hoaDon);
-                        TextView txtHDTongTien = dialog.findViewById(R.id.txtHDTongTien);
+                    TextView txtHDTenNV = dialog.findViewById(R.id.txtHDTenNV);
+                    TextView txtHDTenKH = dialog.findViewById(R.id.txtHDTenKH);
+                    TextView txtHDNgayBan = dialog.findViewById(R.id.txtHDNgayBan);
+                    RecyclerView recycle_hoaDon = dialog.findViewById(R.id.recycle_hoaDon);
+                    TextView txtHDTongTien = dialog.findViewById(R.id.txtHDTongTien);
 
 //                    Settext cho các View
 
-                        txtHDTenNV.setText(fullName);
-                        txtHDTenKH.setText(tenKH);
-                        txtHDNgayBan.setText(ngayTaoHD);
-                        String outTongTien = String.format("%,.0f", tongTien);
-                        txtHDTongTien.setText(outTongTien + "Đ");
+                    txtHDTenNV.setText(fullName);
+                    txtHDTenKH.setText(tenKH);
+                    txtHDNgayBan.setText(ngayTaoHD);
+                    String outTongTien = String.format("%,.0f", tongTien);
+                    txtHDTongTien.setText(outTongTien + "Đ");
 
-                        listGioHang = daoGioHang.getGioHang();
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                        recycle_hoaDon.setLayoutManager(linearLayoutManager);
-                        AdapterHoaDon adapterHoaDon = new AdapterHoaDon(getContext(), listGioHang);
-                        recycle_hoaDon.setAdapter(adapterHoaDon);
+                    listGioHang = daoGioHang.getGioHang();
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                    recycle_hoaDon.setLayoutManager(linearLayoutManager);
+                    AdapterHoaDon adapterHoaDon = new AdapterHoaDon(getContext(), listGioHang);
+                    recycle_hoaDon.setAdapter(adapterHoaDon);
 
 //                Sự kiện Button Hủy
-                        btnHoaDonHuy.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
+                    btnHoaDonHuy.setOnClickListener(v13 -> dialog.dismiss());
 
 //                Sự kiện Button Xác nhận -> Chuyển Hóa đơn vào bảng Lưu hóa đơn
-                        btnHoaDonXN.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                    btnHoaDonXN.setOnClickListener(v14 -> {
 //                            Tạo Model HoaDon, Thêm vào bảng Lưu Hóa đơn
-                                HoaDon hoaDon = new HoaDon(maUser, tenKH, ngayTaoHD, 1);
-                                boolean check = daoHoaDon.addHoaDon(hoaDon);
-                                if (!check){
-                                    Toast.makeText(getContext(), "Fail!", Toast.LENGTH_SHORT).show();
-                                }
-                                ArrayList<HoaDon> listHoaDon = daoHoaDon.getHoaDon();
-                                int listHDSize = listHoaDon.size();
+                        HoaDon hoaDon = new HoaDon(maUser, tenKH, ngayTaoHD, 1);
+                        boolean check = daoHoaDon.addHoaDon(hoaDon);
+                        if (!check){
+                            Toast.makeText(getContext(), "Fail!", Toast.LENGTH_SHORT).show();
+                        }
+                        ArrayList<HoaDon> listHoaDon = daoHoaDon.getHoaDon();
+                        int listHDSize = listHoaDon.size();
 //                            Lấy ra danh sách Hóa đơn
-                                if (listHDSize > 0){
-                                    boolean checkLuuHD = true;
-                                    for (int i = 0; i < listHDSize; i++) {
-                                        HoaDon hoaDonModel = listHoaDon.get(i);
+                        if (listHDSize > 0){
+                            boolean checkLuuHD = true;
+                            for (int i = 0; i < listHDSize; i++) {
+                                HoaDon hoaDonModel = listHoaDon.get(i);
 //                                    Tạo Model Lưu Hóa đơn
-                                        LuuHoaDon luuHoaDon = new LuuHoaDon(hoaDonModel.getMaHoaDon(),
-                                                hoaDonModel.getMaUser(),
-                                                hoaDonModel.getTenUser(),
-                                                hoaDonModel.getTenKhachHang(),
-                                                hoaDonModel.getNgayLapHD(),
-                                                hoaDonModel.getMaSP(),
-                                                hoaDonModel.getTenSP(),
-                                                hoaDonModel.getSoLuong(),
-                                                hoaDonModel.getSize(),
-                                                hoaDonModel.getDonGia(),
-                                                hoaDonModel.getThanhTien());
+                                LuuHoaDon luuHoaDon = new LuuHoaDon(hoaDonModel.getMaHoaDon(),
+                                        hoaDonModel.getMaUser(),
+                                        hoaDonModel.getTenUser(),
+                                        hoaDonModel.getTenKhachHang(),
+                                        hoaDonModel.getNgayLapHD(),
+                                        hoaDonModel.getMaSP(),
+                                        hoaDonModel.getTenSP(),
+                                        hoaDonModel.getSoLuong(),
+                                        hoaDonModel.getSize(),
+                                        hoaDonModel.getDonGia(),
+                                        hoaDonModel.getThanhTien());
 //                                    Lưu hóa đơn vào bảng Lưu Hóa đơn
-                                        boolean checkAddHD = daoLuuHD.addLuuHD(luuHoaDon);
-                                        if (!checkAddHD){
-                                            Toast.makeText(getContext(), "Lưu HD Fail!", Toast.LENGTH_SHORT).show();
-                                            checkLuuHD = false;
-                                        }
-                                    }
-                                    if (checkLuuHD){
-//                                    Lưu hóa đơn thành công -> Xóa thông tin giỏ hàng, hóa đơn
-                                        int listGHSize = listHoaDon.size();
-                                        if (listGHSize != 0){
-                                            for (int i = 0; i < listGHSize; i++) {
-                                                daoGioHang.deleteGiohang(listGioHang.get(i));
-                                            }
-                                        }
-                                        if (listHDSize != 0){
-                                            for (int i = 0; i < listHDSize; i++) {
-                                                daoHoaDon.deleteHoaDon(listHoaDon.get(i));
-                                            }
-                                        }
-                                        createData();
-                                        Toast.makeText(getContext(), "Mua hàng thành công!", Toast.LENGTH_SHORT).show();
-                                        txtGHTongTien.setText("0 VNĐ");
-                                        dialog.dismiss();
-                                    }
+                                boolean checkAddHD = daoLuuHD.addLuuHD(luuHoaDon);
+                                if (!checkAddHD){
+                                    Toast.makeText(getContext(), "Lưu HD Fail!", Toast.LENGTH_SHORT).show();
+                                    checkLuuHD = false;
                                 }
                             }
-                        });
-                        dialog.show();
-                    }
+                            if (checkLuuHD){
+//                                    Lưu hóa đơn thành công -> Xóa thông tin giỏ hàng, hóa đơn
+                                int listGHSize = listHoaDon.size();
+                                if (listGHSize != 0){
+                                    for (int i = 0; i < listGHSize; i++) {
+                                        daoGioHang.deleteGiohang(listGioHang.get(i));
+                                    }
+                                }
+                                if (listHDSize != 0){
+                                    for (int i = 0; i < listHDSize; i++) {
+                                        daoHoaDon.deleteHoaDon(listHoaDon.get(i));
+                                    }
+                                }
+                                createData();
+                                Toast.makeText(getContext(), "Mua hàng thành công!", Toast.LENGTH_SHORT).show();
+                                txtGHTongTien.setText("0 VNĐ");
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    dialog.show();
                 }
             }
         });

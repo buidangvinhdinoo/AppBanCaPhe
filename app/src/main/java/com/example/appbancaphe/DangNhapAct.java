@@ -38,64 +38,58 @@ public class DangNhapAct extends AppCompatActivity {
         daoUser = new DAOUser(this);
         edtPassword.getInputType();
         //sự kiện hide pass
-        img_hidePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edtPassword.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                    edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    img_hidePassword.setImageResource(R.drawable.ic_hide_on);
-                } else {
-                    edtPassword.setInputType(129);
-                    img_hidePassword.setImageResource(R.drawable.ic_visibility_off);
-                }
+        img_hidePassword.setOnClickListener(v -> {
+            if (edtPassword.getInputType() != InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                img_hidePassword.setImageResource(R.drawable.ic_hide_on);
+            } else {
+                edtPassword.setInputType(129);
+                img_hidePassword.setImageResource(R.drawable.ic_visibility_off);
             }
         });
 
 //        Get Data từ SharedPreferences
         SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-        String user = pref.getString("USERNAME", "");
-        String pass = pref.getString("PASSWORD", "");
+        String un = pref.getString("USERNAME", "");
+        String pw = pref.getString("PASSWORD", "");
         boolean rem = pref.getBoolean("REMEMBER", false);
 
-        edtUser.setText(user);
-        edtPassword.setText(pass);
+        edtUser.setText(un);
+        edtPassword.setText(pw);
         checkBox.setChecked(rem);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String strUser = edtUser.getText().toString();
-                String strPass = edtPassword.getText().toString();
-                boolean checkLogin = true;
+        btnLogin.setOnClickListener(v -> {
+            String strUser = edtUser.getText().toString();
+            String strPass = edtPassword.getText().toString();
+            boolean checkLogin = true;
 
 //                Kiểm tra tên đăng nhập
-                if (strUser.isEmpty()) {
-                    edtUser.setHintTextColor(Color.RED);
-                    Toast.makeText(DangNhapAct.this, "Nhập tên đăng nhập!", Toast.LENGTH_SHORT).show();
-                    checkLogin = false;
-                }
+            if (strUser.isEmpty()) {
+                edtUser.setHintTextColor(Color.RED);
+                Toast.makeText(DangNhapAct.this, "Nhập tên đăng nhập!", Toast.LENGTH_SHORT).show();
+                checkLogin = false;
+            }
 //                Kiểm tra mật khẩu
-                if (strPass.isEmpty()) {
-                    edtPassword.setHintTextColor(Color.RED);
-                    Toast.makeText(DangNhapAct.this, "Nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-                    checkLogin = false;
-                }
+            if (strPass.isEmpty()) {
+                edtPassword.setHintTextColor(Color.RED);
+                Toast.makeText(DangNhapAct.this, "Nhập mật khẩu!", Toast.LENGTH_SHORT).show();
+                checkLogin = false;
+            }
 
 //                Kiểm tra User tồn tại
-                if (checkLogin) {
-                    ArrayList<User> list = daoUser.checkLogin(strUser, strPass);
-                    if (list.size() > 0) {
-                        Toast.makeText(DangNhapAct.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("user", strUser);
-                        startActivity(intent);
-                        User user = list.get(0);
-                        int maUser = user.getID_User();
-                        remmemberUser(maUser, strUser, strPass, checkBox.isChecked());
-                        closeKeyboard();
-                    } else {
-                        Toast.makeText(DangNhapAct.this, "Tên đăng nhập hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
-                    }
+            if (checkLogin) {
+                ArrayList<User> list = daoUser.checkLogin(strUser, strPass);
+                if (!list.isEmpty()) {
+                    Toast.makeText(DangNhapAct.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("user", strUser);
+                    startActivity(intent);
+                    User user = list.get(0);
+                    int maUser = user.getID_User();
+                    remmemberUser(maUser, strUser, strPass, checkBox.isChecked());
+                    closeKeyboard();
+                } else {
+                    Toast.makeText(DangNhapAct.this, "Tên đăng nhập hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -110,9 +104,9 @@ public class DangNhapAct extends AppCompatActivity {
             editor.putInt("MA", maUser);
             editor.putString("USERNAME", u);
             editor.putString("PASSWORD", p);
-            editor.putBoolean("REMEMBER", status);
+            editor.putBoolean("REMEMBER", true);
         }
-        editor.commit();
+        editor.apply();
     }
 
     private void closeKeyboard() {

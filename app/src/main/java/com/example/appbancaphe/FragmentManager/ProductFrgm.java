@@ -132,67 +132,55 @@ public class ProductFrgm extends Fragment {
         createData(0);
 
 //        Set sự kiện OnClick Filter
-        filterProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_filters);
-                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        filterProduct.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.dialog_filters);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                RadioButton rdoSPAll = dialog.findViewById(R.id.rdoSPAll);
-                RadioButton rdoSPGia = dialog.findViewById(R.id.rdoSPGia);
-                RadioButton rdoSPTL = dialog.findViewById(R.id.rdoSPTL);
+            RadioButton rdoSPAll = dialog.findViewById(R.id.rdoSPAll);
+            RadioButton rdoSPGia = dialog.findViewById(R.id.rdoSPGia);
+            RadioButton rdoSPTL = dialog.findViewById(R.id.rdoSPTL);
 
-                switch (rdoCheck) {
-                    case 0: {
-                        rdoSPAll.setChecked(true);
-                    }
-                    break;
-                    case 1: {
-                        rdoSPGia.setChecked(true);
-                    }
-                    break;
-                    case 2: {
-                        rdoSPTL.setChecked(true);
-                    }
+            switch (rdoCheck) {
+                case 0: {
+                    rdoSPAll.setChecked(true);
                 }
-
-                rdoSPAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            rdoCheck = 0;
-                            createData(0);
-                            dialog.dismiss();
-                        }
-                    }
-                });
-
-                rdoSPGia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            rdoCheck = 1;
-                            createData(1);
-                            dialog.dismiss();
-                        }
-                    }
-                });
-
-                rdoSPTL.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            rdoCheck = 2;
-                            createData(2);
-                            dialog.dismiss();
-                        }
-                    }
-                });
-
-                dialog.show();
+                break;
+                case 1: {
+                    rdoSPGia.setChecked(true);
+                }
+                break;
+                case 2: {
+                    rdoSPTL.setChecked(true);
+                }
             }
+
+            rdoSPAll.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    rdoCheck = 0;
+                    createData(0);
+                    dialog.dismiss();
+                }
+            });
+
+            rdoSPGia.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    rdoCheck = 1;
+                    createData(1);
+                    dialog.dismiss();
+                }
+            });
+
+            rdoSPTL.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    rdoCheck = 2;
+                    createData(2);
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
         });
 
         return view;
@@ -200,7 +188,7 @@ public class ProductFrgm extends Fragment {
 
     private void createData(int rdoCheck) {
         DAOSanPham daoSanPham = new DAOSanPham(getActivity());
-        ArrayList<SanPham> list = (ArrayList<SanPham>) daoSanPham.getAllProduct(rdoCheck);
+        ArrayList<SanPham> list = daoSanPham.getAllProduct(rdoCheck);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerProduct.setLayoutManager(linearLayoutManager);
